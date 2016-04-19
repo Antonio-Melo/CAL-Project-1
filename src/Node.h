@@ -15,5 +15,14 @@ class Node {
 	double latitude_deg, longitude_deg, latitude_rad, longitude_rad;
 public:
 	Node(double latitude_deg, double longitude_deg, double latitude_rad, double longitute_rad);
+	double getLatitudeDeg() const;
+	void setLatitudeDeg(double latitudeDeg);
+	double getLatitudeRad() const;
+	void setLatitudeRad(double latitudeRad);
+	double getLongitudeDeg() const;
+	void setLongitudeDeg(double longitudeDeg);
+	double getLongitudeRad() const;
+	void setLongitudeRad(double longitudeRad);
 };
 
+#endif

@@ -6,6 +6,7 @@
  */
 
 #include "StreetMap.h"
+#include <map>
 
 using namespace std;
 
@@ -31,8 +32,8 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		std::string   line;
 
 		int idNode=0;
-		int X_deg=0, X_rad = 0;
-		int Y_deg=0, Y_rad = 0;
+		double X_deg=0, X_rad = 0;
+		double Y_deg=0, Y_rad = 0;
 
 		while(getline(inFile, line))
 		{
@@ -49,7 +50,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		    linestream >> X_rad;
 		    getline(linestream, data, ';');  // read up-to the first ; (discard ;).
 		    linestream >> Y_rad;
-		    nodes.insert(pair<int,Node>::(idNodenew Node(X_deg, Y_deg, X_rad, Y_rad)));
+		    nodes.insert(pair<int,Node>(idNode,Node(X_deg, Y_deg, X_rad, Y_rad)));
 		}
 
 		inFile.close();
@@ -76,9 +77,9 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 			    linestream >> idRoad;
 
 			    getline(linestream, data, ';');  // read up-to the first ; (discard ;).
-			    getline(linestream, nameRoad,';'); //read name of road and discard ;
+			    getline(linestream, nameRoad,';'); //rea<< "+" << it->second.getLatitudeDeg()d name of road and discard ;
 			    linestream >> is2Way;
-			    roads.insert(pair<int,Road>(idRoad,new Road(nameRoad, is2Way)));
+			    roads.insert(pair<int,Road>(idRoad,Road(nameRoad, is2Way)));
 
 			}
 
@@ -92,7 +93,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 				    exit(1);   // call system to stop
 				}
 
-				int idRoad = 0;
+
 				int oNode = 0;
 				int dNode = 0;
 
@@ -108,8 +109,25 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 				    linestream >> oNode;
 				    getline(linestream, data,';'); //read name of road and discard ;
 				    linestream >> dNode;
-				    roads.find(idRoad)->second.addNode(nodes.find(idNode)->second);
+				    roads.find(idRoad)->second.addNode(&(nodes.find(idNode)->second));
 				}
 
 				inFile.close();
+
+				map<int, Node>::iterator it = nodes.begin();
+				map<int, Node>::iterator ite = nodes.end();
+
+				while(it != ite){
+					cout << it->first << "  " << it->second.getLatitudeDeg() << "  " << it->second.getLongitudeDeg()<< "  " << it->second.getLatitudeRad() << "  "<< it->second.getLongitudeRad() << "\n";
+					it++;
+				}
+
+				map<int, Road>::iterator itr = roads.begin();
+				map<int, Road>::iterator itre = roads.end();
+
+				while(itr != itre){
+					cout << itr->first << "  " << itr->second.getName() << "  "  << itr->second.isIsTwoWay() << "\n";
+					itr++;
+				}
+
 }

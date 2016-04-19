@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include "StreetMap.h"
 
 void exercicio1();
 void exercicio2();
@@ -226,9 +227,13 @@ void exercicio3()
 }
 
 int main() {
-	exercicio1();
+	//exercicio1();
 	//exercicio2();
 	//exercicio3();
-	getchar();
+
+	StreetMap* streetmap = new StreetMap();
+	streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
+	char temp;
+	cin >> temp;
 	return 0;
 }
