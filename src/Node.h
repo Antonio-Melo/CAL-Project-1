@@ -12,9 +12,8 @@
 using namespace std;
 
 class Node {
-	int id;
 	double latitude_deg, longitude_deg, latitude_rad, longitude_rad;
 public:
-	Node(int id, double latitude_deg, double longitude_deg, double latitude_rad, double longitute_rad);
+	Node(double latitude_deg, double longitude_deg, double latitude_rad, double longitute_rad);
 };
 

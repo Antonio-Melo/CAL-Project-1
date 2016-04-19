@@ -18,7 +18,7 @@ private:
 	int id;
 	bool is_two_way;
 public:
-	Road(int id,string name,bool is);
+	Road(string name,bool is);
 	addNode(Node &n);
 };
 

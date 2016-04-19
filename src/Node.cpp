@@ -9,8 +9,7 @@
 
 using namespace std;
 
-Node::Node(int id, double latitude_deg, double longitude_deg, double latitute_rad, double longitute_rad){
-	this->id = id;
+Node::Node(double latitude_deg, double longitude_deg, double latitute_rad, double longitute_rad){
 	this->latitude_deg = latitude_deg;
 	this->latitude_rad = latitute_rad;
 	this->longitude_deg = longitude_deg;
