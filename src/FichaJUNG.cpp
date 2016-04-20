@@ -233,6 +233,7 @@ int main() {
 
 	StreetMap* streetmap = new StreetMap();
 	streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
+	streetmap->draw();
 	char temp;
 	cin >> temp;
 	return 0;
