@@ -50,8 +50,6 @@ int main(){
 	cout << "Loading Map" << endl;
 
 	StreetMap* streetmap = new StreetMap("maps/" + map_folder);
-
-	//streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
 	streetmap->write();
 	streetmap->draw();
 	char temp;
