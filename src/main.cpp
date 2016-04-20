@@ -17,7 +17,7 @@ int main(){
 	string map_folder;
 	vector<string> maps;
 
-	cout << "Welcome to easy pilot!" << endl;
+	cout << "Welcome to Easy Pilot!" << endl;
 	cout << "This is a simple 'GPS' that allows you to find the best way to your destination!" << endl;
 	cout << "(Please note that this doesn't track your current location.)" << endl << endl;
 	cout << "First of all enter the map you want to load (list of maps): " << endl;
@@ -48,20 +48,13 @@ int main(){
 	//system("CLS");
 
 	cout << "Loading Map" << endl;
-/*
-	StreetMap* streetmap = new StreetMap("maps/" + map_folder + "/nodes.txt",
-<<<<<<< HEAD
-			"maps/" + map_folder + "roads.txt",
-			"maps/" + map_folder + "subroads.txt");
-=======
-			"maps/" + map_folder + "/roads.txt",
-			"maps/" + map_folder + "/subroads.txt");
->>>>>>> refs/heads/Piroco
+
+	StreetMap* streetmap = new StreetMap("maps/" + map_folder);
+
 	//streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
 	streetmap->write();
 	streetmap->draw();
 	char temp;
 	cin >> temp;
-*/
 	return 0;
 }

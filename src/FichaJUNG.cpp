@@ -3,7 +3,6 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "StreetMap.h"
 
 void exercicio1();
 void exercicio2();
@@ -18,7 +17,7 @@ void exercicio1()
 
 	gv->createWindow(600, 600);
 
-
+	gv->defineEdgeDashed(true);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
 
@@ -26,7 +25,7 @@ void exercicio1()
 	gv->addNode(1);
 	gv->addEdge(0, 0, 1, EdgeType::UNDIRECTED);
 
-	Sleep(100); // use sleep(1) in linux ; Sleep(100) on Windows
+	Sleep(2000); // use sleep(1) in linux ; Sleep(2000) on Windows
 
 	gv->removeEdge(0);
 	gv->removeNode(1);
@@ -34,15 +33,21 @@ void exercicio1()
 
 	gv->rearrange();
 
-	Sleep(100);
+	Sleep(2000);
 
 	gv->addEdge(1, 0, 2, EdgeType::UNDIRECTED);
+	gv->defineEdgeCurved(false);
 
 	gv->setVertexLabel(0, "Isto e um no");
 	gv->setEdgeLabel(1, "Isto e uma aresta");
 
 	gv->setVertexColor(2, "green");
 	gv->setEdgeColor(1, "yellow");
+
+	gv->setVertexSize(2, 40);
+	gv->setVertexIcon(0, "icon.gif");
+
+	gv->setEdgeDashed(1, false);
 
 	gv->rearrange();
 
@@ -56,7 +61,6 @@ void exercicio2()
 
 	gv->defineEdgeColor("blue");
 	gv->defineVertexColor("yellow");
-
 	gv->addNode(0,300,50);
 	gv->addNode(1,318,58);
 	gv->addNode(4,300,100);
@@ -103,7 +107,7 @@ void exercicio2()
 
 	while(1)
 	{
-		Sleep(100);
+		Sleep(2000);
 		if (first)
 		{
 		  gv->removeNode(12);
@@ -121,7 +125,7 @@ void exercicio2()
 		gv->addEdge(15, 11, 15, EdgeType::UNDIRECTED);
 		gv->rearrange();
 
-		Sleep(100);
+		Sleep(2000);
 		gv->removeNode(14);
 		gv->removeNode(15);
 		gv->addNode(16,300,550);
@@ -129,7 +133,7 @@ void exercicio2()
 		gv->addEdge(16, 11, 16, EdgeType::UNDIRECTED);
 		gv->addEdge(17, 11, 17, EdgeType::UNDIRECTED);
 		gv->rearrange();
-		Sleep(100);
+		Sleep(2000);
 
 		gv->removeNode(16);
 		gv->removeNode(17);
@@ -138,7 +142,7 @@ void exercicio2()
 		gv->addEdge(18, 11, 18, EdgeType::UNDIRECTED);
 		gv->addEdge(19, 11, 19, EdgeType::UNDIRECTED);
 		gv->rearrange();
-		Sleep(100);
+		Sleep(2000);
 
 		gv->removeNode(18);
 		gv->removeNode(19);
@@ -227,14 +231,9 @@ void exercicio3()
 }
 
 /*int main() {
-	//exercicio1();
+	exercicio1();
 	//exercicio2();
 	//exercicio3();
-
-	StreetMap* streetmap = new StreetMap();
-	streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
-	streetmap->draw();
-	char temp;
-	cin >> temp;
+	getchar();
 	return 0;
 }*/

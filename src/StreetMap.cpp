@@ -11,8 +11,8 @@
 
 using namespace std;
 
-StreetMap::StreetMap(string path_1, string path_2, string path_3) {
-	loadFromTxt(path_1.c_str(), path_2.c_str(), path_3.c_str());
+StreetMap::StreetMap(string path) {
+	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str());
 }
 
 StreetMap::~StreetMap() {
@@ -175,8 +175,8 @@ void StreetMap::draw() {
 
 
 	gv->defineVertexColor("blue");
+	gv->defineEdgeCurved(false);
 	gv->defineEdgeColor("black");
-	//gv->setEdgeCurved(false);
 
 	map<int, Node>::iterator it = nodes.begin();
 	map<int, Node>::iterator ite = nodes.end();
@@ -185,6 +185,7 @@ void StreetMap::draw() {
 		pixelY = ((it->second.getLatitudeDeg() - 41.17946) / (41.19294 - 41.17946)) * (600 - 0);
 		pixelX = ((it->second.getLongitudeDeg() - -8.633804)/ (-8.627743 - -8.633804))*(600);
 		gv->addNode(it->first,pixelX, -pixelY);
+		gv->setVertexSize(it->first,1);
 		it++;
 	}
 
@@ -201,10 +202,13 @@ void StreetMap::draw() {
 				gv->addEdge(kkk,id1, id2, EdgeType::UNDIRECTED);
 			else
 				gv->addEdge(kkk,id1, id2, EdgeType::DIRECTED);
+			gv->setEdgeThickness(kkk,10);
 			kkk++;
 		}
 		itr++;
 	}
+	gv->rearrange();
+
 }
 
 void StreetMap::write() {
