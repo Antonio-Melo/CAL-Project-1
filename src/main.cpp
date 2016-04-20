@@ -38,7 +38,7 @@ int main(){
 		return EXIT_FAILURE;
 	}
 
-	for (int i = 0; i < maps.size(); i++){
+	for (unsigned int i = 0; i < maps.size(); i++){
 		cout << i << ": " << maps[i] << endl;
 	}
 
@@ -50,7 +50,10 @@ int main(){
 
 	cout << "Loading Map" << endl;
 
+	//Creating a StreetMap based on the input
 	StreetMap* streetmap = new StreetMap("maps/" + map_folder);
+
+	//Generating Graph/ Writing & Drawing
 	streetmap->generateGraph();
 	streetmap->write();
 	streetmap->draw();
