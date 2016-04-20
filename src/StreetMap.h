@@ -24,6 +24,7 @@
 using namespace std;
 
 #define EARTH_RADIUS 6371.0
+#define HIGHWAY_PRICE 0.1;
 
 typedef struct itineraryPoint{
 	int nodeID;
