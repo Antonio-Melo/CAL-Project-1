@@ -7,6 +7,7 @@
 #include "graphviewer.h"
 #include "dirent.h"
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -40,16 +41,20 @@ int main(){
 		cout << i << ": " << maps[i] << endl;
 	}
 
-	system("CLS");
+	while (find(maps.begin(), maps.end(), map_folder) == maps.end()){
+		getline(cin,map_folder);
+	}
+
+	//system("CLS");
 
 	cout << "Loading Map" << endl;
 
-	//StreetMap* streetmap = new StreetMap();
-	/*streetmap->loadFromTxt("maps/" + map_folder + "/nodes.txt",
+	StreetMap* streetmap = new StreetMap("maps/" + map_folder + "/nodes.txt",
 			"maps/" + map_folder + "roads.txt",
-	//		"maps/" + map_folder + "subroads.txt");*/
+			"maps/" + map_folder + "subroads.txt");
 	//streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
-	//streetmap->draw();
+	streetmap->write();
+	streetmap->draw();
 	char temp;
 	cin >> temp;
 
