@@ -26,8 +26,8 @@ using namespace std;
 #define EARTH_RADIUS 6371.0
 
 class StreetMap {
-	map<int,Node> nodes;
-	map<int,Road> roads;
+	map<unsigned long int,Node> nodes;
+	map<unsigned long int,Road> roads;
 	Graph<int> graph;
 	//vector<Road> roads;
 
