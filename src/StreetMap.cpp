@@ -170,16 +170,21 @@ void StreetMap::draw() {
 	gv->setBackground("background.jpg");
 
 	gv->createWindow(600, 600);
+	int pixelY, pixelX;
+	 //= ((targetLat - minLat) / (maxLat - minLat)) * (maxYPixel - minYPixel)
 
 
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
+	//gv->setEdgeCurved(false);
 
 	map<int, Node>::iterator it = nodes.begin();
 	map<int, Node>::iterator ite = nodes.end();
 
 	while(it != ite){
-		gv->addNode(it->first,it->second.getLatitudeDeg()*10000, it->second.getLongitudeDeg()*10000);
+		pixelY = ((it->second.getLatitudeDeg() - 41.17946) / (41.19294 - 41.17946)) * (600 - 0);
+		pixelX = ((it->second.getLongitudeDeg() - -8.633804)/ (-8.627743 - -8.633804))*(600);
+		gv->addNode(it->first,pixelX, -pixelY);
 		it++;
 	}
 

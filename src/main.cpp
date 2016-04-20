@@ -48,15 +48,20 @@ int main(){
 	//system("CLS");
 
 	cout << "Loading Map" << endl;
-
+/*
 	StreetMap* streetmap = new StreetMap("maps/" + map_folder + "/nodes.txt",
+<<<<<<< HEAD
 			"maps/" + map_folder + "roads.txt",
 			"maps/" + map_folder + "subroads.txt");
+=======
+			"maps/" + map_folder + "/roads.txt",
+			"maps/" + map_folder + "/subroads.txt");
+>>>>>>> refs/heads/Piroco
 	//streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
 	streetmap->write();
 	streetmap->draw();
 	char temp;
 	cin >> temp;
-
+*/
 	return 0;
 }
