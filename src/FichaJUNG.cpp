@@ -232,10 +232,9 @@ int main() {
 	//exercicio3();
 
 	StreetMap* streetmap = new StreetMap();
-streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
+	streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
+	streetmap->draw();
 	char temp;
-
-
 	cin >> temp;
 	return 0;
 }
