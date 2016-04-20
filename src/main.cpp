@@ -44,12 +44,12 @@ int main(){
 
 	cout << "Loading Map" << endl;
 
-	StreetMap* streetmap = new StreetMap();
+	//StreetMap* streetmap = new StreetMap();
 	/*streetmap->loadFromTxt("maps/" + map_folder + "/nodes.txt",
 			"maps/" + map_folder + "roads.txt",
-			"maps/" + map_folder + "subroads.txt");*/
-	streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
-	streetmap->draw();
+	//		"maps/" + map_folder + "subroads.txt");*/
+	//streetmap->loadFromTxt("nodes.txt","roads.txt","subroads.txt");
+	//streetmap->draw();
 	char temp;
 	cin >> temp;
 

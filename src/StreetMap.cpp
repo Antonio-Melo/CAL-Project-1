@@ -11,7 +11,9 @@
 
 using namespace std;
 
-StreetMap::StreetMap() {}
+StreetMap::StreetMap(string path_1, string path_2, string path_3) {
+	loadFromTxt(path_1.c_str(), path_2.c_str(), path_3.c_str());
+}
 
 StreetMap::~StreetMap() {
 	// TODO Auto-generated destructor stub

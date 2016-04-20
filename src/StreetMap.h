@@ -32,7 +32,7 @@ class StreetMap {
 	//vector<Road> roads;
 
 public:
-	StreetMap();
+	StreetMap(string path_1, string path_2, string path_3);
 	virtual ~StreetMap();
 	void loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path);
 	void generateGraph();
