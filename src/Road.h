@@ -17,15 +17,17 @@ class Road {
 private:
 	string name;
 	bool is_two_way;
+	string type;  //HIGHWAY or NATIONAL or ROUTE
 	vector<int> nodesID;
 public:
 	Road(string name,bool is);
-	bool isIsTwoWay() const;
-	void setIsTwoWay(bool isTwoWay);
-	const string& getName() const;
-	void setName(const string& name);
 	void addNodeID(int id);
+	bool isIsTwoWay() const;
+	const string& getName() const;
 	const vector<int> getNodesID() const;
+	const string getType()const;
+	void setName(const string& name);
+	void setIsTwoWay(bool isTwoWay);
 	void setNodesID(const vector<int> nodesID);
 };
 

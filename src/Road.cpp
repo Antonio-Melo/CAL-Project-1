@@ -12,21 +12,30 @@ Road::Road(string name, bool is) {
 	is_two_way = is;
 }
 
-bool Road::isIsTwoWay() const {
-	return is_two_way;
+void Road::addNodeID(int id){
+	nodesID.push_back(id);
 }
 
-void Road::setIsTwoWay(bool isTwoWay) {
-	is_two_way = isTwoWay;
+bool Road::isIsTwoWay() const {
+	return is_two_way;
 }
 
 const string& Road::getName() const {
 	return name;
 }
 
+const string Road::getType()const{
+	return type;
+}
+
 const vector<int> Road::getNodesID() const {
 	return nodesID;
 }
+
+void Road::setIsTwoWay(bool isTwoWay) {
+	is_two_way = isTwoWay;
+}
+
 
 void Road::setNodesID(const vector<int> nodesID) {
 	this->nodesID = nodesID;
@@ -36,6 +45,4 @@ void Road::setName(const string& name) {
 	this->name = name;
 }
 
-void Road::addNodeID(int id){
-	nodesID.push_back(id);
-}
+
