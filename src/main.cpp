@@ -16,6 +16,7 @@ int main(){
 	struct dirent *ent;
 	string map_folder;
 	vector<string> maps;
+	char sel;
 
 	cout << "Welcome to Easy Pilot!" << endl;
 	cout << "This is a simple 'GPS' that allows you to find the best way to your destination!" << endl;
@@ -50,9 +51,23 @@ int main(){
 	cout << "Loading Map" << endl;
 
 	StreetMap* streetmap = new StreetMap("maps/" + map_folder);
+	streetmap->generateGraph();
 	streetmap->write();
 	streetmap->draw();
-	char temp;
-	cin >> temp;
+	string road1 = "y", road2 = "t";
+	//getline(cin,road1);
+	//getline(cin,road2);
+
+	streetmap->addItinerary(56,road1);
+	streetmap->addItinerary(2,road2);
+	//cout << streetmap->getItinerary()[0].nodeID << streetmap->getItinerary()[0].name;
+	//cout << streetmap->getItinerary()[1].nodeID << streetmap->getItinerary()[1].name;
+
+	streetmap->calculateItinerary();
+
+	//cout << streetmap->getNodeID(road1);
+	cin >> sel;
+
+
 	return 0;
 }

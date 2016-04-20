@@ -8,6 +8,8 @@
 #include "StreetMap.h"
 //#include <map>
 #include <cmath>
+#include <stdlib.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -171,7 +173,7 @@ void StreetMap::draw() {
 
 	gv->createWindow(600, 600);
 	int pixelY, pixelX;
-	 //= ((targetLat - minLat) / (maxLat - minLat)) * (maxYPixel - minYPixel)
+	//= ((targetLat - minLat) / (maxLat - minLat)) * (maxYPixel - minYPixel)
 
 
 	gv->defineVertexColor("blue");
@@ -202,7 +204,7 @@ void StreetMap::draw() {
 				gv->addEdge(kkk,id1, id2, EdgeType::UNDIRECTED);
 			else
 				gv->addEdge(kkk,id1, id2, EdgeType::DIRECTED);
-			gv->setEdgeThickness(kkk,10);
+			gv->setEdgeThickness(kkk,5);
 			kkk++;
 		}
 		itr++;
@@ -234,4 +236,110 @@ void StreetMap::write() {
 		cout << "\n";
 		itr++;
 	}
+}
+
+const Graph<int>& StreetMap::getGraph() const {
+	return graph;
+}
+
+void StreetMap::setGraph(const Graph<int>& graph) {
+	this->graph = graph;
+}
+
+const vector<itineraryPoint>& StreetMap::getItinerary() const {
+	return itinerary;
+}
+
+void StreetMap::setItinerary(const vector<itineraryPoint>& itinerary) {
+	this->itinerary = itinerary;
+}
+
+const map<int, Node>& StreetMap::getNodes() const {
+	return nodes;
+}
+
+void StreetMap::setNodes(const map<int, Node>& nodes) {
+	this->nodes = nodes;
+}
+
+const map<int, Road>& StreetMap::getRoads() const {
+	return roads;
+}
+
+void StreetMap::addItinerary(const int nodeID, const string name) {
+	itineraryPoint p;
+	p.nodeID = nodeID;
+	p.name = name;
+	itinerary.push_back(p);
+}
+
+bool StreetMap::removeItinerary(const string name) {
+	bool tmp = false;
+	for (int i = 0; i < itinerary.size(); i++){
+		if (itinerary[i].name == name){
+			itinerary.erase(itinerary.begin() + i);
+			tmp = true;
+		}
+	}
+	return tmp;
+}
+
+void StreetMap::setRoads(const map<int, Road>& roads) {
+	this->roads = roads;
+}
+
+int StreetMap::getNodeID(const string road){
+	vector<int> tmp;
+	map<int, Road>::iterator it = roads.begin();
+	map<int, Road>::iterator ite = roads.end();
+
+	while(it != ite){
+		if(it->second.getName() == road){
+			//concatenate all node IDs
+			tmp.insert(tmp.end(),it->second.getNodesID().begin(), it->second.getNodesID().end());
+		}
+		it++;
+	}
+	if (tmp.size() != 0){
+		int r = rand() % tmp.size();
+		return tmp[r];
+	}
+	return -1;
+}
+
+int StreetMap::getNodeID(const string road1, const string road2){
+	vector<int> tmp1;
+	vector<int> tmp2;
+
+	map<int, Road>::iterator it = roads.begin();
+	map<int, Road>::iterator ite = roads.end();
+
+	while(it != ite){
+		if(it->second.getName() == road1){
+			//concatenate all node IDs
+			tmp1.insert(tmp1.end(),it->second.getNodesID().begin(), it->second.getNodesID().end());
+		}
+		if(it->second.getName() == road2){
+			tmp2.insert(tmp2.end(),it->second.getNodesID().begin(), it->second.getNodesID().end());
+		}
+		it++;
+	}
+
+	for (int i = 0; i < tmp1.size(); i++){
+		if (find(tmp2.begin(),tmp2.end(), tmp1[i]) != tmp2.end())
+			return tmp1[i];
+	}
+	return -1;
+}
+
+bool StreetMap::calculateItinerary() {
+	vector<int> tmp;
+	graph.floydWarshallShortestPath();
+	tmp = graph.getfloydWarshallPath(itinerary[0].nodeID, itinerary[1].nodeID);
+
+	for (int i = 0; i < tmp.size(); i++){
+		cout << tmp[i] << endl;
+	}
+
+	return (tmp.size() != 0);
 }

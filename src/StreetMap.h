@@ -25,11 +25,17 @@ using namespace std;
 
 #define EARTH_RADIUS 6371.0
 
+typedef struct itineraryPoint{
+	int nodeID;
+	string name;
+};
+
 class StreetMap {
 	map<int,Node> nodes;
 	map<int,Road> roads;
 	Graph<int> graph;
 	//vector<Road> roads;
+	vector<itineraryPoint> itinerary;
 
 public:
 	StreetMap(string path);
@@ -38,6 +44,19 @@ public:
 	void generateGraph();
 	void draw();
 	void write();
+	const Graph<int>& getGraph() const;
+	void setGraph(const Graph<int>& graph);
+	const vector<itineraryPoint>& getItinerary() const;
+	void setItinerary(const vector<itineraryPoint>& itinerary);
+	void addItinerary(const int nodeID, const string name);
+	bool removeItinerary(const string name);
+	const map<int, Node>& getNodes() const;
+	void setNodes(const map<int, Node>& nodes);
+	const map<int, Road>& getRoads() const;
+	void setRoads(const map<int, Road>& roads);
+	int getNodeID(const string road);
+	int getNodeID(const string road1, const string road2);
+	bool calculateItinerary();
 };
 
 double nodeDistance(Node *n1, Node *n2);
