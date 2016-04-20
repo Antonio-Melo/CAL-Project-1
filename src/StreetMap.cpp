@@ -20,6 +20,9 @@ StreetMap::~StreetMap() {
 void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path){
 	ifstream inFile;
 	//Ler os nodes
+
+	map<unsigned long int, int> tempconvN;
+	map<unsigned long int, int> tempconvR;
 	inFile.open(nodes_path,std::fstream::in);
 
 	if (!inFile) {
@@ -29,7 +32,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	std::string   line;
 
-	int idNode=0;
+	int idNode=0, fakeIDN = 0, fakeIDR = 0;
 	double X_deg=0, X_rad = 0;
 	double Y_deg=0, Y_rad = 0;
 	int count = 0;
@@ -41,6 +44,8 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 		linestream >> idNode;
 
+		tempconvN.insert(pair<unsigned long int, int>(idNode, fakeIDN));
+		fakeIDN++;
 		getline(linestream, data, ';');  // read up-to the first ; (discard ;).
 		linestream >> X_deg;
 		getline(linestream, data, ';');  // read up-to the first ; (discard ;).
@@ -49,7 +54,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		linestream >> X_rad;
 		getline(linestream, data, ';');  // read up-to the first ; (discard ;).
 		linestream >> Y_rad;
-		nodes.insert(pair<int,Node>(idNode,Node(X_deg, Y_deg, X_rad, Y_rad)));
+		nodes.insert(pair<int,Node>(fakeIDN,Node(X_deg, Y_deg, X_rad, Y_rad)));
 		count++;
 	}
 
@@ -77,11 +82,13 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 
 		linestream >> idRoad;
+		tempconvR.insert(pair<unsigned long int, int>(idRoad, fakeIDR));
+		fakeIDR++;
 
 		getline(linestream, data, ';');  // read up-to the first ; (discard ;).
 		getline(linestream, nameRoad,';'); //rea<< "+" << it->second.getLatitudeDeg()d name of road and discard ;
 		linestream >> is2Way;
-		roads.insert(pair<int,Road>(idRoad,Road(nameRoad, is2Way)));
+		roads.insert(pair<int,Road>(fakeIDR,Road(nameRoad, is2Way)));
 
 	}
 
@@ -111,9 +118,9 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		linestream >> oNode;
 		getline(linestream, data,';'); //read name of road and discard ;
 		linestream >> dNode;
-		if(roads.find(idRoad)->second.getNodesID().size() == 0)
-			roads.find(idRoad)->second.addNodeID(oNode);
-		roads.find(idRoad)->second.addNodeID(dNode);
+		if(roads.find(tempconvR.find(idRoad)->second)->second.getNodesID().size() == 0)
+			roads.find(tempconvR.find(idRoad)->second)->second.addNodeID(tempconvN.find(oNode)->second);
+		roads.find(tempconvR.find(idRoad)->second)->second.addNodeID(tempconvN.find(dNode)->second);
 	}
 
 	inFile.close();
