@@ -78,21 +78,36 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	unsigned long int idRoad = 0;
 	string nameRoad = "";
-	bool is2Way = false;
+	bool is2Way;
 
 	while(getline(inFile, line))
 	{
+		is2Way = false;
 		stringstream linestream(line);
 		string data;
+		string type;
+		string is2_Way;
+		roadType rtype;
 
 
 		linestream >> idRoad; //idRoad
 
 		getline(linestream, data, ';');  // read up-to the first ; (discard ;).
-		getline(linestream, nameRoad,';'); //read<< "+" << it->second.getLatitudeDeg()d name of road and discard ;
-		linestream >> is2Way;
-		roads.insert(pair<int,Road>(fakeIDR,Road(nameRoad, is2Way)));
-		tempconvR.insert(pair<unsigned long int, int>(idRoad, fakeIDR));
+		linestream >> type;
+		if(type == "Autoestrada"){
+			rtype = HIGHWAY;
+		}else if(type == "Nacional"){
+			rtype = NATIONAL;
+		}else
+			rtype = ROUTE;
+		getline(linestream, nameRoad,';');
+		nameRoad += type +nameRoad;
+		linestream >> is2_Way;
+		if(is2_Way == "true"){
+			is2Way = true;
+		}
+		roads.insert(pair<int,Road>(fakeIDR,Road(nameRoad, is2Way,rtype)));
+		tempconvR.insert(pair<unsigned long int, int>(idRoad, fakeIDR,rtype));
 		fakeIDR++;
 	}
 

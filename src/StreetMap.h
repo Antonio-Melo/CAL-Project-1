@@ -34,7 +34,6 @@ class StreetMap {
 	map<int,Node> nodes;
 	map<int,Road> roads;
 	Graph<int> graph;
-	//vector<Road> roads;
 	vector<itineraryPoint> itinerary;
 
 public:

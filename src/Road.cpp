@@ -7,9 +7,10 @@
 
 #include "Road.h"
 
-Road::Road(string name, bool is) {
+Road::Road(string name, bool is,roadType type) {
 	this->name = name;
 	is_two_way = is;
+	this->type = type;
 }
 
 void Road::addNodeID(int id){
@@ -35,7 +36,6 @@ const vector<int> Road::getNodesID() const {
 void Road::setIsTwoWay(bool isTwoWay) {
 	is_two_way = isTwoWay;
 }
-
 
 void Road::setNodesID(const vector<int> nodesID) {
 	this->nodesID = nodesID;

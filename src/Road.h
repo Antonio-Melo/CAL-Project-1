@@ -13,14 +13,16 @@
 
 using namespace std;
 
+enum roadType{HIGHWAY,NATIONAL,ROUTE};
+
 class Road {
 private:
 	string name;
 	bool is_two_way;
-	string type;  //HIGHWAY or NATIONAL or ROUTE
+	roadType type;//HIGHWAY or NATIONAL or ROUTE
 	vector<int> nodesID;
 public:
-	Road(string name,bool is);
+	Road(string name,bool is,roadType type);
 	void addNodeID(int id);
 	bool isIsTwoWay() const;
 	const string& getName() const;
