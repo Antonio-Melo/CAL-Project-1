@@ -24,18 +24,18 @@ const string& Road::getName() const {
 	return name;
 }
 
-const vector<Node*>& Road::getNodes() const {
-	return nodes;
+const vector<int> Road::getNodesID() const {
+	return nodesID;
 }
 
-void Road::setNodes(const vector<Node*>& nodes) {
-	this->nodes = nodes;
+void Road::setNodesID(const vector<int> nodesID) {
+	this->nodesID = nodesID;
 }
 
 void Road::setName(const string& name) {
 	this->name = name;
 }
 
-void Road::addNode(Node* n){
-	nodes.push_back(n);
+void Road::addNodeID(int id){
+	nodesID.push_back(id);
 }

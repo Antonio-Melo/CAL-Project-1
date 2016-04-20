@@ -109,7 +109,9 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 				    linestream >> oNode;
 				    getline(linestream, data,';'); //read name of road and discard ;
 				    linestream >> dNode;
-				    roads.find(idRoad)->second.addNode(&(nodes.find(idNode)->second));
+				    if(roads.find(idRoad)->second.getNodesID().size() == 0)
+				    roads.find(idRoad)->second.addNodeID(oNode);
+				    roads.find(idRoad)->second.addNodeID(dNode);
 				}
 
 				inFile.close();
@@ -126,7 +128,11 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 				map<int, Road>::iterator itre = roads.end();
 
 				while(itr != itre){
-					cout << itr->first << "  " << itr->second.getName() << "  "  << itr->second.isIsTwoWay() << "\n";
+					cout << itr->first << "  " << itr->second.getName() << "  "  << itr->second.isIsTwoWay() << "  " ;
+					for(int i = 0; i < itr->second.getNodesID().size(); i++){
+						cout << itr->second.getNodesID()[i] << "  ";
+					}
+					cout << "\n";
 					itr++;
 				}
 
