@@ -226,7 +226,7 @@ void exercicio3()
 	gv->rearrange();
 }
 
-int main() {
+/*int main() {
 	//exercicio1();
 	//exercicio2();
 	//exercicio3();
@@ -237,4 +237,4 @@ int main() {
 	char temp;
 	cin >> temp;
 	return 0;
-}
+}*/

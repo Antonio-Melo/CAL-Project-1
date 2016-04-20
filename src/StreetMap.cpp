@@ -96,8 +96,8 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	}
 
 
-	int oNode = 0;
-	int dNode = 0;
+	unsigned long int oNode = 0;
+	unsigned long int dNode = 0;
 
 	while(getline(inFile, line))
 	{

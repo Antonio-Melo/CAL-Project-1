@@ -28,7 +28,7 @@ using namespace std;
 class StreetMap {
 	map<unsigned long int,Node> nodes;
 	map<unsigned long int,Road> roads;
-	Graph<int> graph;
+	Graph<unsigned long int> graph;
 	//vector<Road> roads;
 
 public:
