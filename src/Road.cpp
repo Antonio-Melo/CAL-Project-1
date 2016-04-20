@@ -24,11 +24,11 @@ const string& Road::getName() const {
 	return name;
 }
 
-const vector<unsigned long int> Road::getNodesID() const {
+const vector<int> Road::getNodesID() const {
 	return nodesID;
 }
 
-void Road::setNodesID(const vector<unsigned long int> nodesID) {
+void Road::setNodesID(const vector<int> nodesID) {
 	this->nodesID = nodesID;
 }
 
@@ -36,6 +36,6 @@ void Road::setName(const string& name) {
 	this->name = name;
 }
 
-void Road::addNodeID(unsigned long int id){
+void Road::addNodeID(int id){
 	nodesID.push_back(id);
 }

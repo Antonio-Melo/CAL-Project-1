@@ -29,7 +29,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	std::string   line;
 
-	unsigned long int idNode=0;
+	int idNode=0;
 	double X_deg=0, X_rad = 0;
 	double Y_deg=0, Y_rad = 0;
 	int count = 0;
@@ -66,7 +66,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		exit(1);   // call system to stop
 	}
 
-	unsigned long int idRoad = 0;
+	int idRoad = 0;
 	string nameRoad = "";
 	bool is2Way = false;
 
@@ -96,8 +96,8 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	}
 
 
-	unsigned long int oNode = 0;
-	unsigned long int dNode = 0;
+	int oNode = 0;
+	int dNode = 0;
 
 	while(getline(inFile, line))
 	{
@@ -118,8 +118,8 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	inFile.close();
 
-	map<unsigned long int, Node>::iterator it = nodes.begin();
-	map<unsigned long int, Node>::iterator ite = nodes.end();
+	map<int, Node>::iterator it = nodes.begin();
+	map<int, Node>::iterator ite = nodes.end();
 
 	cout << nodes.size() << endl;
 	while(it != ite){
@@ -127,8 +127,8 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		it++;
 	}
 
-	map<unsigned long int, Road>::iterator itr = roads.begin();
-	map<unsigned long int, Road>::iterator itre = roads.end();
+	map<int, Road>::iterator itr = roads.begin();
+	map<int, Road>::iterator itre = roads.end();
 
 	while(itr != itre){
 		cout << itr->first << "  " << itr->second.getName() << "  "  << itr->second.isIsTwoWay() << "  " ;
@@ -141,16 +141,16 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 }
 
 void StreetMap::generateGraph() {
-	map<unsigned long int, Node>::iterator it = nodes.begin();
-	map<unsigned long int, Node>::iterator ite = nodes.end();
+	map<int, Node>::iterator it = nodes.begin();
+	map<int, Node>::iterator ite = nodes.end();
 
 	while(it != ite){
 		graph.addVertex(it->first);
 		it++;
 	}
 
-	map<unsigned long int, Road>::iterator itr = roads.begin();
-	map<unsigned long int, Road>::iterator itre = roads.end();
+	map<int, Road>::iterator itr = roads.begin();
+	map<int, Road>::iterator itre = roads.end();
 
 	while(itr != itre){
 		for(unsigned int i = 0; i < itr->second.getNodesID().size() - 1; i++){
@@ -189,16 +189,16 @@ void StreetMap::draw() {
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
 
-	map<unsigned long int, Node>::iterator it = nodes.begin();
-	map<unsigned long int, Node>::iterator ite = nodes.end();
+	map<int, Node>::iterator it = nodes.begin();
+	map<int, Node>::iterator ite = nodes.end();
 
 	while(it != ite){
 		gv->addNode(it->first,it->second.getLatitudeDeg(), it->second.getLongitudeDeg());
 		it++;
 	}
 
-	map<unsigned long int, Road>::iterator itr = roads.begin();
-	map<unsigned long int, Road>::iterator itre = roads.end();
+	map<int, Road>::iterator itr = roads.begin();
+	map<int, Road>::iterator itre = roads.end();
 
 	while(itr != itre){
 		for(unsigned int i = 0; i < itr->second.getNodesID().size() - 1; i++){
