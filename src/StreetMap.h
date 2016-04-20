@@ -37,7 +37,7 @@ public:
 	void loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path);
 	void generateGraph();
 	void draw();
-
+	void write();
 };
 
 double nodeDistance(Node *n1, Node *n2);
