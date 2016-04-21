@@ -173,7 +173,7 @@ double nodeDistance(Node *n1, Node *n2) {
 	return 2.0 * EARTH_RADIUS * asin(sqrt(u * u + cos(lat1r) * cos(lat2r) * v * v));
 }
 
-void StreetMap::draw() {
+GraphViewer* StreetMap::draw() {
 	GraphViewer *gv = new GraphViewer(600, 600, false);
 
 	gv->setBackground("background.jpg");
@@ -207,17 +207,50 @@ void StreetMap::draw() {
 		for(unsigned int i = 0; i < itr->second.getNodesID().size() - 1; i++){
 			int id1 = itr->second.getNodesID()[i];
 			int id2 = itr->second.getNodesID()[i+1];
+			if(i%5 == 0){
+				gv->setEdgeLabel(itr->first, itr->second.getName());
+			}
 			if (itr->second.isIsTwoWay())
 				gv->addEdge(kkk,id1, id2, EdgeType::UNDIRECTED);
 			else
 				gv->addEdge(kkk,id1, id2, EdgeType::DIRECTED);
+			switch(itr->second.getType()){
+				case roadType.HIGHWAY :
+					gv->setEdgeColor(itr->first, BLUE);
+					break;
+				case roadType.NATIONAL :
+					gv->setEdgeColor(itr->first, GREEN);
+				case roadType.ROUTE :
+					gv->setEdgeColor(itr->first, GRAY);
+			}
 			gv->setEdgeThickness(kkk,5);
 			kkk++;
 		}
 		itr++;
 	}
-	gv->rearrange();
 
+
+	gv->rearrange();
+	return gv;
+
+}
+
+void StreetMap::drawItinerary(){
+	GraphViewer* gv;
+	gv = draw();
+	/*for(int i = 0; paths.size(); i++){
+		gv->addEdge();
+		gv->setEdgeColor();
+	}*/
+	gv->defineVertexColor(YELLOW);
+	while(true){
+		gv->defineVertexSize(0);
+	for(int i = 0; i < paths.size() - 1; i++){
+		gv->setVertexSize(paths[i], 10);
+		gv->rearrange();
+		sleep(1000);
+	}
+	}
 }
 
 void StreetMap::write() {

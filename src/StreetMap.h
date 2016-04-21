@@ -42,7 +42,7 @@ public:
 	virtual ~StreetMap();
 	void loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path);
 	void generateGraph();
-	void draw();
+	GraphViewer* draw();
 	void write();
 	const Graph<int>& getGraph() const;
 	void setGraph(const Graph<int>& graph);
@@ -57,6 +57,7 @@ public:
 	int getNodeID(const string road);
 	int getNodeID(const string road1, const string road2);
 	bool calculateItinerary();
+	void drawItinerary();
 };
 
 double nodeDistance(Node *n1, Node *n2);
