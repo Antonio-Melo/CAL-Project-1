@@ -37,11 +37,12 @@ class StreetMap {
 	Graph<int> graph;
 	vector<itineraryPoint> itinerary;
 	vector<int> path;
+	double latMin, longMin, latMax, longMax;
 
 public:
 	StreetMap(string path);
 	virtual ~StreetMap();
-	void loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path);
+	void loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path, const char *info_path);
 	void generateGraph();
 	GraphViewer* draw();
 	void write();

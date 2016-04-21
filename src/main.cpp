@@ -31,6 +31,8 @@ void seeItinerary() {
 	streetmap->addItinerary(56,"rua1");
 	streetmap->addItinerary(2,"rua2");
 	streetmap->calculateItinerary();
+	streetmap->write();
+	streetmap->draw();
 	streetmap->drawItinerary();
 	//streetmap->printItinerary();
 	getline(cin,sel);
@@ -95,7 +97,7 @@ int main(){
 
 		getline(cin,selected);
 		if (selected == "1"){
-			if(streetmap->getItinerary().size() >= 2){
+			if(streetmap->getItinerary().size() >= 0){
 				seeItinerary();
 			} else {
 				cout << "Itinerary must have at least 2 points." << endl;

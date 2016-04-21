@@ -14,7 +14,7 @@
 using namespace std;
 
 StreetMap::StreetMap(string path) {
-	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str());
+	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str(), (path + "/info.txt").c_str());
 
 	generateGraph();
 
@@ -25,7 +25,7 @@ StreetMap::~StreetMap() {
 	// TODO Auto-generated destructor stub
 }
 
-void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path){
+void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path, const char *info_path){
 	ifstream inFile;
 
 	//Read nodes
@@ -150,6 +150,41 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	}
 	//Closing file
 	inFile.close();
+
+	//Read Info
+	inFile.open(info_path,std::fstream::in);
+
+	//Error opening subroads.txt
+	if (!inFile) {
+		cerr << "Unable to open file subroads.txt";
+		exit(4);   // call system to stop
+	}
+
+	getline(inFile, line);
+
+	stringstream line1(line);
+			string data;
+			string info;
+
+			line1 >> latMin;
+
+			getline(line1, data, ';');  // read up-to the first ; (discard ;).
+			line1 >> latMax;
+
+			getline(inFile, line);
+			stringstream line2(line);
+
+			line2 >> longMin;
+			getline(line2, data, ';'); //read name of road and discard ;
+			line2 >> longMax;
+
+			getline(inFile, info);
+
+		//Closing file
+		inFile.close();
+
+
+
 }
 
 void StreetMap::generateGraph() {
@@ -210,8 +245,8 @@ GraphViewer* StreetMap::draw() {
 	map<int, Node>::iterator ite = nodes.end();
 
 	while(it != ite){
-		pixelY = ((it->second.getLatitudeDeg() - 41.17946) / (41.19294 - 41.17946)) * (600 - 0);
-		pixelX = ((it->second.getLongitudeDeg() - -8.633804)/ (-8.627743 - -8.633804))*(600);
+		pixelY = ((it->second.getLatitudeDeg() - latMin) / (latMax - latMin)) * (600);
+		pixelX = ((it->second.getLongitudeDeg() - longMin)/ (longMax - longMin))*(600);
 		gv->addNode(it->first,pixelX, -pixelY);
 		gv->setVertexSize(it->first,1);
 		it++;
