@@ -17,9 +17,23 @@ void addItineraryPoint() {
 }
 
 void removeItineraryPoint() {
+	int index = -1;
+	cout << "Insert index to remove from itinerary: " << endl;
+	cin >> index;
+	cin.ignore();
+	if(!(streetmap->removeItinerary(index)))
+		cout << "Point was not removed because index inserted is out of range." << endl;
+
 }
 
 void seeItinerary() {
+	string sel;
+	streetmap->addItinerary(56,"rua1");
+	streetmap->addItinerary(2,"rua2");
+	streetmap->calculateItinerary();
+	streetmap->drawItinerary();
+	//streetmap->printItinerary();
+	getline(cin,sel);
 }
 
 int main(){
@@ -74,9 +88,9 @@ int main(){
 			for(unsigned int i = 0; i < streetmap->getItinerary().size(); i++){
 				cout << "|" << setw(2) << i << "|" << setw(20) << streetmap->getItinerary()[i].name << "|" << setw(4) << streetmap->getItinerary()[i].nodeID << "|" << endl;
 			}
-			cout << "------------------------------" << endl;
+			cout << "------------------------------" << endl << endl;;
 		} else {
-
+			cout << "Itinerary is empty." << endl << endl;
 		}
 
 		getline(cin,selected);
@@ -100,8 +114,6 @@ int main(){
 		//getline(cin,road1);
 		//getline(cin,road2);
 
-		//streetmap->addItinerary(56,road1);
-		//streetmap->addItinerary(2,road2);
 		//cout << streetmap->getItinerary()[0].nodeID << streetmap->getItinerary()[0].name;
 		//cout << streetmap->getItinerary()[1].nodeID << streetmap->getItinerary()[1].name;
 

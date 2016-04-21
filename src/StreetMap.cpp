@@ -332,15 +332,20 @@ void StreetMap::addItinerary(const int nodeID, const string name) {
 	itinerary.push_back(p);
 }
 
-bool StreetMap::removeItinerary(const string name) {
-	bool tmp = false;
-	for (unsigned int i = 0; i < itinerary.size(); i++){
+bool StreetMap::removeItinerary(const int index) {
+	//bool tmp = false;
+	/*for (unsigned int i = 0; i < itinerary.size(); i++){
 		if (itinerary[i].name == name){
 			itinerary.erase(itinerary.begin() + i);
 			tmp = true;
 		}
+	}*/
+	if (index >= 0 || index <= itinerary.size()){
+		itinerary.erase(itinerary.begin() + index);
+		return true;
 	}
-	return tmp;
+	return false;
+	//return tmp;
 }
 
 void StreetMap::setRoads(const map<int, Road>& roads) {

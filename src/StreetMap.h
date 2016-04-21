@@ -50,7 +50,7 @@ public:
 	const vector<itineraryPoint>& getItinerary() const;
 	void setItinerary(const vector<itineraryPoint>& itinerary);
 	void addItinerary(const int nodeID, const string name);
-	bool removeItinerary(const string name);
+	bool removeItinerary(const int index);
 	const map<int, Node>& getNodes() const;
 	void setNodes(const map<int, Node>& nodes);
 	const map<int, Road>& getRoads() const;
