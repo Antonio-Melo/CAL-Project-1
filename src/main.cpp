@@ -19,6 +19,7 @@ void seeItinerary() {
 	streetmap->addItinerary(56,"rua1");
 	streetmap->addItinerary(2,"rua2");
 	streetmap->calculateItinerary();
+	streetmap->write();
 	streetmap->draw();
 	streetmap->drawItinerary();
 	//streetmap->printItinerary();
@@ -35,7 +36,6 @@ void removeItineraryPoint() {
 	cin.ignore();
 	if(!(streetmap->removeItinerary(index)))
 		cout << "Point was not removed because index inserted is out of range." << endl;
-
 }
 
 int main(){
