@@ -25,7 +25,7 @@ const string& Road::getName() const {
 	return name;
 }
 
-const string Road::getType()const{
+const roadType Road::getType()const{
 	return type;
 }
 

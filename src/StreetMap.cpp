@@ -107,7 +107,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 			is2Way = true;
 		}
 		roads.insert(pair<int,Road>(fakeIDR,Road(nameRoad, is2Way,rtype)));
-		tempconvR.insert(pair<unsigned long int, int>(idRoad, fakeIDR,rtype));
+		tempconvR.insert(pair<unsigned long int, int>(idRoad, fakeIDR));
 		fakeIDR++;
 	}
 
