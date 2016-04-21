@@ -11,12 +11,22 @@
 
 using namespace std;
 
+StreetMap *streetmap;
+
+void addItineraryPoint() {
+}
+
+void removeItineraryPoint() {
+}
+
+void seeItinerary() {
+}
+
 int main(){
 	DIR *dir;
 	struct dirent *ent;
 	string map_folder;
 	vector<string> maps;
-	char sel;
 
 	cout << "Welcome to Easy Pilot!" << endl;
 	cout << "This is a simple 'GPS' that allows you to find the best way to your destination!" << endl;
@@ -51,25 +61,55 @@ int main(){
 	cout << "Loading Map" << endl;
 
 	//Creating a StreetMap based on the input
-	StreetMap* streetmap = new StreetMap("maps/" + map_folder);
+	streetmap = new StreetMap("maps/" + map_folder);
 
-	//Generating Graph/ Writing & Drawing
-	streetmap->generateGraph();
-	streetmap->write();
-	streetmap->draw();
-	string road1 = "y", road2 = "t";
-	//getline(cin,road1);
-	//getline(cin,road2);
+	string selected = "";
 
-	streetmap->addItinerary(56,road1);
-	streetmap->addItinerary(2,road2);
-	//cout << streetmap->getItinerary()[0].nodeID << streetmap->getItinerary()[0].name;
-	//cout << streetmap->getItinerary()[1].nodeID << streetmap->getItinerary()[1].name;
+	while (selected != "0"){
 
-	streetmap->calculateItinerary();
+		if (streetmap->getItinerary().size() != 0){
+			cout << "------------------------------" << endl;
+			cout << "| #| Descriptor         |Node|" << endl;
+			cout << "------------------------------" << endl;
+			for(unsigned int i = 0; i < streetmap->getItinerary().size(); i++){
+				cout << "|" << setw(2) << i << "|" << setw(20) << streetmap->getItinerary()[i].name << "|" << setw(4) << streetmap->getItinerary()[i].nodeID << "|" << endl;
+			}
+			cout << "------------------------------" << endl;
+		} else {
 
-	//cout << streetmap->getNodeID(road1);
-	cin >> sel;
+		}
+
+		getline(cin,selected);
+		if (selected == "1"){
+			if(streetmap->getItinerary().size() >= 2){
+				seeItinerary();
+			} else {
+				cout << "Itinerary must have at least 2 points." << endl;
+			}
+		} else if (selected == "2"){
+			addItineraryPoint();
+		} else if (selected == "3"){
+			removeItineraryPoint();
+		} else {
+			cout << "Insert valid option!" << endl;
+		}
+		//Generating Graph/ Writing & Drawing
+		//streetmap->write();
+		//streetmap->draw();
+		//string road1 = "y", road2 = "t";
+		//getline(cin,road1);
+		//getline(cin,road2);
+
+		//streetmap->addItinerary(56,road1);
+		//streetmap->addItinerary(2,road2);
+		//cout << streetmap->getItinerary()[0].nodeID << streetmap->getItinerary()[0].name;
+		//cout << streetmap->getItinerary()[1].nodeID << streetmap->getItinerary()[1].name;
+
+		//streetmap->calculateItinerary();
+
+		//cout << streetmap->getNodeID(road1);
+
+	}
 
 
 	return 0;

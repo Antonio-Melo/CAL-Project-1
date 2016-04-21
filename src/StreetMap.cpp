@@ -15,6 +15,10 @@ using namespace std;
 
 StreetMap::StreetMap(string path) {
 	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str());
+
+	generateGraph();
+
+	graph.floydWarshallShortestPath();
 }
 
 StreetMap::~StreetMap() {
@@ -389,7 +393,6 @@ int StreetMap::getNodeID(const string road1, const string road2){
 
 bool StreetMap::calculateItinerary() {
 	vector<int> tmp;
-	graph.floydWarshallShortestPath();
 	tmp = graph.getfloydWarshallPath(itinerary[0].nodeID, itinerary[1].nodeID);
 
 	for (unsigned int i = 0; i < tmp.size(); i++){
