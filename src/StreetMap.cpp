@@ -208,11 +208,15 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	inFile.close();
 
 	//Choose random POI's
+	int numofpois=2;
 	int idPois =0;
 	int n;
 	srand (time(NULL));
+	if(nodes.size() > 100){
+		numofpois = nodes.size()/100 *numofpois;
+	}
 
-	for(unsigned int i = 0;i < 2;i++){
+	for(unsigned int i = 0;i < numofpois;i++){
 		//Restaurants
 		n = rand() % nodes.size();
 		POI rest = POI(n,RESTAURANT);
