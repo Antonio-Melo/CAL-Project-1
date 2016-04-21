@@ -86,7 +86,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	while(getline(inFile, line))
 	{
-		is2Way = false;
+		is2Way = true;
 		stringstream linestream(line);
 		string data;
 		string type;
@@ -108,7 +108,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		nameRoad += type +nameRoad;
 		linestream >> is2_Way;
 		if(is2_Way == "true"){
-			is2Way = true;
+			is2Way = false;
 		}
 		roads.insert(pair<int,Road>(fakeIDR,Road(nameRoad, is2Way,rtype)));
 		tempconvR.insert(pair<unsigned long int, int>(idRoad, fakeIDR));
@@ -220,30 +220,38 @@ GraphViewer* StreetMap::draw() {
 	map<int, Road>::iterator itr = roads.begin();
 	map<int, Road>::iterator itre = roads.end();
 
-	int kkk = 0;
+	int edgeID = 0;
 
 	while(itr != itre){
 		for(unsigned int i = 0; i < itr->second.getNodesID().size() - 1; i++){
 			int id1 = itr->second.getNodesID()[i];
 			int id2 = itr->second.getNodesID()[i+1];
-			if(i%5 == 0){
-				gv->setEdgeLabel(itr->first, itr->second.getName());
-			}
+
 			if (itr->second.isIsTwoWay())
-				gv->addEdge(kkk,id1, id2, EdgeType::UNDIRECTED);
+				gv->addEdge(edgeID,id1, id2, EdgeType::UNDIRECTED);
 			else
-				gv->addEdge(kkk,id1, id2, EdgeType::DIRECTED);
+				gv->addEdge(edgeID,id1, id2, EdgeType::DIRECTED);
+
 			switch(itr->second.getType()){
-				case HIGHWAY :
-					gv->setEdgeColor(itr->first, BLUE);
-					break;
-				case NATIONAL :
-					gv->setEdgeColor(itr->first, GREEN);
-				case ROUTE :
-					gv->setEdgeColor(itr->first, GRAY);
+			case HIGHWAY :
+				gv->setEdgeColor(edgeID, BLUE);
+				break;
+			case NATIONAL :
+				gv->setEdgeColor(edgeID, GREEN);
+				break;
+			case ROUTE :
+				gv->setEdgeColor(edgeID, GRAY);
+				break;
+			default:
+				break;
 			}
-			gv->setEdgeThickness(kkk,5);
-			kkk++;
+
+			if(i%5 == 0){
+				gv->setEdgeLabel(edgeID, itr->second.getName());
+			}
+
+			gv->setEdgeThickness(edgeID,5);
+			edgeID++;
 		}
 		itr++;
 	}
@@ -262,13 +270,16 @@ void StreetMap::drawItinerary(){
 		gv->setEdgeColor();
 	}*/
 	gv->defineVertexColor(YELLOW);
-	while(true){
-		gv->defineVertexSize(0);
-	for(int i = 0; i < path.size() - 1; i++){
-		gv->setVertexSize(path[i], 10);
+	while(1){
+		for(int i = 0; i < path.size(); i++){
+			gv->setVertexSize(path[i], 15);
+			gv->rearrange();
+			Sleep(1000);
+		}
+		for(int i = 0; i < path.size(); i++){
+			gv->setVertexSize(path[i], 1);
+		}
 		gv->rearrange();
-		Sleep(1000);
-	}
 	}
 }
 
@@ -397,12 +408,11 @@ int StreetMap::getNodeID(const string road1, const string road2){
 }
 
 bool StreetMap::calculateItinerary() {
-	vector<int> tmp;
-	tmp = graph.getfloydWarshallPath(itinerary[0].nodeID, itinerary[1].nodeID);
+	path = graph.getfloydWarshallPath(itinerary[0].nodeID, itinerary[1].nodeID);
 
-	for (unsigned int i = 0; i < tmp.size(); i++){
-		cout << tmp[i] << endl;
+	for (unsigned int i = 0; i < path.size(); i++){
+		cout << path[i] << endl;
 	}
 
-	return (tmp.size() != 0);
+	return (path.size() != 0);
 }
