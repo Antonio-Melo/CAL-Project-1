@@ -36,7 +36,12 @@ typedef struct itineraryPoint{
 class StreetMap {
 	map<int,Node> nodes;
 	map<int,Road> roads;
+
 	vector<POI> pois;
+	Graph<int> dist_graph;
+	Graph<int> time_graph;
+	Graph<int> dist_graph_no_tolls;
+	Graph<int> time_graph_no_tolls;
 	vector<itineraryPoint> itinerary;
 	vector<int> path;
 	Graph<int> graph;
@@ -45,12 +50,12 @@ class StreetMap {
 public:
 	StreetMap(string path);
 	virtual ~StreetMap();
-	void loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path, const char *info_path);
+	void loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path, const char *info_path, bool show_status);
 	void generateGraph();
 	GraphViewer* draw();
 	void write();
-	const Graph<int>& getGraph() const;
-	void setGraph(const Graph<int>& graph);
+	//const Graph<int>& getGraph() const;
+	//void setGraph(const Graph<int>& graph);
 	const vector<itineraryPoint>& getItinerary() const;
 	void setItinerary(const vector<itineraryPoint>& itinerary);
 	void addItinerary(const int nodeID, const string name);
@@ -61,8 +66,8 @@ public:
 	void setRoads(const map<int, Road>& roads);
 	int getNodeID(const string road);
 	int getNodeID(const string road1, const string road2);
-	bool calculateItinerary();
-	bool calculateItineraryAux(int nodeID1, int nodeID2);
+	bool calculateItinerary(bool dist, bool tolls);
+	bool calculateItineraryAux(int nodeID1, int nodeID2, Graph<int> *graph);
 	void drawItinerary();
 };
 
