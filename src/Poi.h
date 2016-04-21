@@ -18,7 +18,7 @@ class Poi {
 public:
 	Poi(int idNode,poiType type);
 	virtual ~Poi();
-	const Node getNode() const;
+	const int getNode() const;
 	const poiType getType() const;
 };
 

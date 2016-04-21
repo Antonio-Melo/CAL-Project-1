@@ -5,20 +5,20 @@
 			<provider copy-of="extension" id="org.eclipse.cdt.ui.UserLanguageSettingsProvider"/>
 			<provider-reference id="org.eclipse.cdt.core.ReferencedProjectsLanguageSettingsProvider" ref="shared-provider"/>
 			<provider-reference id="org.eclipse.cdt.managedbuilder.core.MBSLanguageSettingsProvider" ref="shared-provider"/>
-			<provider class="org.eclipse.cdt.managedbuilder.internal.language.settings.providers.GCCBuiltinSpecsDetectorMinGW" console="false" env-hash="1871296981412011895" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetectorMinGW" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings MinGW" parameter="${COMMAND} ${FLAGS} -E -P -v -dD &quot;${INPUTS}&quot; -std=c++1y" store-entries-with-project="true">
+			<provider class="org.eclipse.cdt.managedbuilder.internal.language.settings.providers.GCCBuiltinSpecsDetectorMinGW" console="false" env-hash="848835802275738215" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetectorMinGW" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings MinGW" parameter="${COMMAND} ${FLAGS} -E -P -v -dD &quot;${INPUTS}&quot; -std=c++1y" store-entries-with-project="true">
 				<language-scope id="org.eclipse.cdt.core.gcc"/>
 				<language-scope id="org.eclipse.cdt.core.g++"/>
 				<language id="org.eclipse.cdt.core.gcc">
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/include">
+					<entry kind="includePath" name="C:/MINGW/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include-fixed">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/mingw32/include">
+					<entry kind="includePath" name="C:/MINGW/mingw32/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="WIN32" value="1">
@@ -740,25 +740,25 @@
 					</entry>
 				</language>
 				<language id="org.eclipse.cdt.core.g++">
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include/c++">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include/c++">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include/c++/mingw32">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include/c++/mingw32">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include/c++/backward">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include/c++/backward">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/include">
+					<entry kind="includePath" name="C:/MINGW/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include-fixed">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/mingw32/include">
+					<entry kind="includePath" name="C:/MINGW/mingw32/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="_INTEGRAL_MAX_BITS" value="64">
@@ -1493,20 +1493,20 @@
 			<provider copy-of="extension" id="org.eclipse.cdt.ui.UserLanguageSettingsProvider"/>
 			<provider-reference id="org.eclipse.cdt.core.ReferencedProjectsLanguageSettingsProvider" ref="shared-provider"/>
 			<provider-reference id="org.eclipse.cdt.managedbuilder.core.MBSLanguageSettingsProvider" ref="shared-provider"/>
-			<provider class="org.eclipse.cdt.managedbuilder.internal.language.settings.providers.GCCBuiltinSpecsDetectorMinGW" console="false" env-hash="1871296981412011895" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetectorMinGW" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings MinGW" parameter="${COMMAND} ${FLAGS} -E -P -v -dD &quot;${INPUTS}&quot; -std=c++1y" store-entries-with-project="true">
+			<provider class="org.eclipse.cdt.managedbuilder.internal.language.settings.providers.GCCBuiltinSpecsDetectorMinGW" console="false" env-hash="848835802275738215" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetectorMinGW" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings MinGW" parameter="${COMMAND} ${FLAGS} -E -P -v -dD &quot;${INPUTS}&quot; -std=c++1y" store-entries-with-project="true">
 				<language-scope id="org.eclipse.cdt.core.gcc"/>
 				<language-scope id="org.eclipse.cdt.core.g++"/>
 				<language id="org.eclipse.cdt.core.gcc">
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/include">
+					<entry kind="includePath" name="C:/MINGW/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include-fixed">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/mingw32/include">
+					<entry kind="includePath" name="C:/MINGW/mingw32/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="WIN32" value="1">
@@ -2228,25 +2228,25 @@
 					</entry>
 				</language>
 				<language id="org.eclipse.cdt.core.g++">
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include/c++">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include/c++">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include/c++/mingw32">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include/c++/mingw32">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include/c++/backward">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include/c++/backward">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/include">
+					<entry kind="includePath" name="C:/MINGW/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/lib/gcc/mingw32/4.8.1/include-fixed">
+					<entry kind="includePath" name="C:/MINGW/lib/gcc/mingw32/4.8.1/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/MinGW/mingw32/include">
+					<entry kind="includePath" name="C:/MINGW/mingw32/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="_INTEGRAL_MAX_BITS" value="64">

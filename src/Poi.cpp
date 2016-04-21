@@ -16,7 +16,7 @@ Poi::~Poi() {
 	// TODO Auto-generated destructor stub
 }
 
-const Node Poi::getNode() const{
+const int Poi::getNode() const{
 	return idNode;
 }
 

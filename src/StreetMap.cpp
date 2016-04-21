@@ -230,12 +230,12 @@ GraphViewer* StreetMap::draw() {
 			else
 				gv->addEdge(kkk,id1, id2, EdgeType::DIRECTED);
 			switch(itr->second.getType()){
-				case roadType.HIGHWAY :
+				case HIGHWAY :
 					gv->setEdgeColor(itr->first, BLUE);
 					break;
-				case roadType.NATIONAL :
+				case NATIONAL :
 					gv->setEdgeColor(itr->first, GREEN);
-				case roadType.ROUTE :
+				case ROUTE :
 					gv->setEdgeColor(itr->first, GRAY);
 			}
 			gv->setEdgeThickness(kkk,5);
@@ -260,10 +260,10 @@ void StreetMap::drawItinerary(){
 	gv->defineVertexColor(YELLOW);
 	while(true){
 		gv->defineVertexSize(0);
-	for(int i = 0; i < paths.size() - 1; i++){
-		gv->setVertexSize(paths[i], 10);
+	for(int i = 0; i < path.size() - 1; i++){
+		gv->setVertexSize(path[i], 10);
 		gv->rearrange();
-		sleep(1000);
+		Sleep(1000);
 	}
 	}
 }
