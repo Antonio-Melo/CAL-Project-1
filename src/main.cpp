@@ -36,7 +36,9 @@ void removeItineraryPoint() {
 	cin.ignore();
 	if(!(streetmap->removeItinerary(index)))
 		cout << "Point was not removed because index inserted is out of range." << endl;
+
 }
+
 
 int main(){
 	DIR *dir;
