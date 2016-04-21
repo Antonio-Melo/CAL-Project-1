@@ -13,6 +13,18 @@ using namespace std;
 
 StreetMap *streetmap;
 
+
+void seeItinerary() {
+	string sel;
+	streetmap->addItinerary(56,"rua1");
+	streetmap->addItinerary(2,"rua2");
+	streetmap->calculateItinerary();
+	streetmap->draw();
+	streetmap->drawItinerary();
+	//streetmap->printItinerary();
+	//while(!cin.get());
+}
+
 void addItineraryPoint() {
 }
 
@@ -24,16 +36,6 @@ void removeItineraryPoint() {
 	if(!(streetmap->removeItinerary(index)))
 		cout << "Point was not removed because index inserted is out of range." << endl;
 
-}
-
-void seeItinerary() {
-	string sel;
-	streetmap->addItinerary(56,"rua1");
-	streetmap->addItinerary(2,"rua2");
-	streetmap->calculateItinerary();
-	streetmap->drawItinerary();
-	//streetmap->printItinerary();
-	getline(cin,sel);
 }
 
 int main(){
@@ -88,14 +90,24 @@ int main(){
 			for(unsigned int i = 0; i < streetmap->getItinerary().size(); i++){
 				cout << "|" << setw(2) << i << "|" << setw(20) << streetmap->getItinerary()[i].name << "|" << setw(4) << streetmap->getItinerary()[i].nodeID << "|" << endl;
 			}
-			cout << "------------------------------" << endl << endl;;
 		} else {
-			cout << "Itinerary is empty." << endl << endl;
+			cout << "Itinerary is empty." << endl;
 		}
+
+		//Print menu
+		cout << "|----------------------------|" << endl;
+		cout << "|         Easy Pilot         |" << endl;
+		cout << "|                            |" << endl;
+		cout << "| 1. Calculate best way      |" << endl;
+		cout << "| 2. Add to Itinerary        |" << endl;
+		cout << "| 3. Remove from itinerary   |" << endl;
+		cout << "| 0. Exit                    |" << endl;
+		cout << "|                            |" << endl;
+		cout << "\\----------------------------/" << endl << endl;
 
 		getline(cin,selected);
 		if (selected == "1"){
-			if(streetmap->getItinerary().size() >= 2){
+			if(streetmap->getItinerary().size() >= 0){
 				seeItinerary();
 			} else {
 				cout << "Itinerary must have at least 2 points." << endl;
@@ -104,7 +116,7 @@ int main(){
 			addItineraryPoint();
 		} else if (selected == "3"){
 			removeItineraryPoint();
-		} else {
+		} else if (selected != "0"){
 			cout << "Insert valid option!" << endl;
 		}
 		//Generating Graph/ Writing & Drawing

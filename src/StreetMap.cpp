@@ -6,7 +6,6 @@
  */
 
 #include "StreetMap.h"
-//#include <map>
 #include <cmath>
 #include <stdlib.h>
 #include <algorithm>
@@ -86,7 +85,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	while(getline(inFile, line))
 	{
-		is2Way = false;
+		is2Way = true;
 		stringstream linestream(line);
 		string data;
 		string type;
@@ -108,7 +107,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		nameRoad += type +nameRoad;
 		linestream >> is2_Way;
 		if(is2_Way == "true"){
-			is2Way = true;
+			is2Way = false;
 		}
 		roads.insert(pair<int,Road>(fakeIDR,Road(nameRoad, is2Way,rtype)));
 		tempconvR.insert(pair<unsigned long int, int>(idRoad, fakeIDR));
@@ -332,7 +331,7 @@ void StreetMap::addItinerary(const int nodeID, const string name) {
 	itinerary.push_back(p);
 }
 
-bool StreetMap::removeItinerary(const int index) {
+bool StreetMap::removeItinerary(const unsigned int index) {
 	//bool tmp = false;
 	/*for (unsigned int i = 0; i < itinerary.size(); i++){
 		if (itinerary[i].name == name){
@@ -340,7 +339,7 @@ bool StreetMap::removeItinerary(const int index) {
 			tmp = true;
 		}
 	}*/
-	if (index >= 0 || index <= itinerary.size()){
+	if (index >= 0 && index <= itinerary.size()){
 		itinerary.erase(itinerary.begin() + index);
 		return true;
 	}
@@ -397,11 +396,24 @@ int StreetMap::getNodeID(const string road1, const string road2){
 }
 
 bool StreetMap::calculateItinerary() {
-	vector<int> tmp;
-	tmp = graph.getfloydWarshallPath(itinerary[0].nodeID, itinerary[1].nodeID);
+	path.clear();
 
-	for (unsigned int i = 0; i < tmp.size(); i++){
-		cout << tmp[i] << endl;
+	for(int i = 0; i < itinerary.size() - 1; i++){
+		if (!(calculateItineraryAux(itinerary[i].nodeID, itinerary[i+1].nodeID)))
+			return false;
+	}
+
+	return true;
+}
+
+bool StreetMap::calculateItineraryAux(int nodeID1, int nodeID2) {
+	vector<int> tmp;
+	tmp = graph.getfloydWarshallPath(nodeID1, nodeID2);
+
+	path.insert(path.end(), tmp.begin(), tmp.end());
+
+	for (unsigned int i = 0; i < path.size(); i++){
+		cout << path[i] << endl;
 	}
 
 	return (tmp.size() != 0);
