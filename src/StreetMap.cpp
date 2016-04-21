@@ -374,11 +374,19 @@ int StreetMap::getNodeID(const string road){
 	while(it != ite){
 		if(it->second.getName() == road){
 			//concatenate all node IDs
-			tmp.insert(tmp.end(),it->second.getNodesID().begin(), it->second.getNodesID().end());
+			for (unsigned int i = 0; i < it->second.getNodesID().size(); i++){
+				tmp.push_back(it->second.getNodesID()[i]);
+			}
+			//tmp.resize(it->second.getNodesID().size());
+				//tmp.insert(tmp.end(),it->second.getNodesID().begin(), it->second.getNodesID().end()); //not working because of memory issue
 		}
 		it++;
 	}
+
+	cout << tmp.size();
+
 	if (tmp.size() != 0){
+		cout << tmp.size();
 		int r = rand() % tmp.size();
 		return tmp[r];
 	}
@@ -386,8 +394,8 @@ int StreetMap::getNodeID(const string road){
 }
 
 int StreetMap::getNodeID(const string road1, const string road2){
-	vector<int> tmp1;
-	vector<int> tmp2;
+	vector<int> tmp1 = {};
+	vector<int> tmp2 = {};
 
 	map<int, Road>::iterator it = roads.begin();
 	map<int, Road>::iterator ite = roads.end();
@@ -395,10 +403,16 @@ int StreetMap::getNodeID(const string road1, const string road2){
 	while(it != ite){
 		if(it->second.getName() == road1){
 			//concatenate all node IDs
-			tmp1.insert(tmp1.end(),it->second.getNodesID().begin(), it->second.getNodesID().end());
+			for (unsigned int i = 0; i < it->second.getNodesID().size(); i++){
+				tmp1.push_back(it->second.getNodesID()[i]);
+			}
+			//tmp1.insert(tmp1.end(),it->second.getNodesID().begin(), it->second.getNodesID().end());
 		}
 		if(it->second.getName() == road2){
-			tmp2.insert(tmp2.end(),it->second.getNodesID().begin(), it->second.getNodesID().end());
+			for (unsigned int i = 0; i < it->second.getNodesID().size(); i++){
+				tmp2.push_back(it->second.getNodesID()[i]);
+			}
+			//tmp2.insert(tmp2.end(),it->second.getNodesID().begin(), it->second.getNodesID().end());
 		}
 		it++;
 	}

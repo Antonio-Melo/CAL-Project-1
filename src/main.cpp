@@ -27,6 +27,58 @@ void seeItinerary() {
 }
 
 void addItineraryPoint() {
+	string option = "";
+	while (option != "1" && option != "2" && option != "3" && option != "4" && option != "0"){
+		cout << "1->Node ID;  2->Road;  3->Road Intersection;  4->POI;  0->Back;" << endl;
+		getline(cin, option);
+	}
+
+	int id;
+	if (option == "1"){
+		cout << "Node ID:" << endl;
+		cin >> id;
+		cin.ignore();
+		if (id < streetmap->getNodes().size()){
+			stringstream tmp;
+			tmp << id;
+			streetmap->addItinerary(id, tmp.str());
+		} else {
+			cout << "Point was not added because ID inserted is out of range." << endl;
+			return;
+		}
+	} else if (option == "2"){
+		string road1;
+		cout << "Road:" << endl;
+		getline(cin, road1);
+		id = streetmap->getNodeID(road1);
+		if (id != -1){
+			streetmap->addItinerary(id, road1);
+		} else {
+			cout << "Point was not added because road inserted was not found." << endl;
+			return;
+		}
+	} else if (option == "3"){
+		string road1;
+		string road2;
+		cout << "Road 1:" << endl;
+		getline(cin, road1);
+
+		cout << "Road 2:" << endl;
+		getline(cin, road2);
+		id = streetmap->getNodeID(road1,road2);
+		if (id != -1){
+			streetmap->addItinerary(id, road1 + "|" + road2);
+		} else {
+			cout << "Point was not added because roads inserted don't intersect." << endl;
+			return;
+		}
+
+	} else if (option == "4"){
+		string poi;
+		cout << "POI:" << endl;
+		getline(cin,poi);
+		//streetmap->addItinerary(id, poi); //falta funcao get nodeID by POI name
+	}
 }
 
 void removeItineraryPoint() {
