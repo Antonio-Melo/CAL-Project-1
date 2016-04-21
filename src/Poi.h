@@ -13,10 +13,10 @@
 enum poiType{POMPGAS,RESTAURANT,HOTEL};
 
 class Poi {
-	Node n;
+	int  idNode;
 	poiType type;
 public:
-	Poi(Node n,poiType type);
+	Poi(int idNode,poiType type);
 	virtual ~Poi();
 	const Node getNode() const;
 	const poiType getType() const;

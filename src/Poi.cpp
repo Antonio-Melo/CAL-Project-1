@@ -7,8 +7,8 @@
 
 #include "Poi.h"
 
-Poi::Poi(Node n,poiType type) {
-	this->n = n;
+Poi::Poi(int idNode,poiType type) {
+	this->idNode = idNode;
 	this->type = type;
 }
 
@@ -17,7 +17,7 @@ Poi::~Poi() {
 }
 
 const Node Poi::getNode() const{
-	return n;
+	return idNode;
 }
 
 const poiType Poi::getType() const{
