@@ -1,0 +1,191 @@
+4311951;;False
+4311949;;False
+26621084;;False
+27009803;Travessa Bernardim Ribeiro;False
+27009797;Rua Bernardim Ribeiro;False
+27009951;Rua de Diu;False
+27009967;Rua de Goa;False
+27103848;Praceta Cristóvão Falcão;False
+27103856;Rua Cristóvão Falcão;False
+36980698;Rua Companhia dos Caolinos;False
+37007106;Rua Gomes Teixeira;False
+37112935;;False
+37112932;Largo Palmira Melheiro;False
+37262660;;False
+37262659;;False
+37262658;;False
+63844503;;False
+75051386;;False
+75051337;Rua António Ramalho;False
+75051391;;False
+75051396;;False
+75051364;Rua Nova dos Fogueteiros;False
+75051483;;False
+36980594;Rua Companhia dos Caolinos;False
+142698147;;False
+142698153;;False
+142698145;Rua João Sá Peixoto;False
+142698144;;False
+142698157;;False
+142698158;;False
+142698159;;False
+142698161;;False
+142698162;;False
+142698164;;False
+142698167;;False
+142698165;;False
+142698163;Rua da Cidade de Bristol;False
+142698171;;False
+142698180;;False
+142698174;;False
+142698183;;False
+142698173;;False
+142699186;;False
+142699185;;False
+142699181;;False
+142699176;;False
+142699178;Praça da Índia;False
+142699184;Rua de Goa;False
+142699187;;False
+142699179;Rua de Ormuz;False
+27010020;Rua de Mormugão;False
+42621526;;False
+95361626;;False
+4311946;;False
+126502564;;False
+35011273;;False
+35011275;;False
+126502559;;False
+95361624;;False
+4311945;;False
+4311944;;False
+95361628;;False
+220137463;;False
+220137475;;False
+220137462;Alameda Miguel Almeida;False
+220137468;;True
+220137465;Rua Carlos de Oliveira;True
+220137466;Praceta Juntos Venceremos;True
+220137474;Rua Hernâni Torres;True
+220137464;Travessa António Costa Reis;True
+220137476;Travessa Artur Napoleão;True
+220137461;;True
+220137473;;True
+220137471;;True
+220137479;;True
+220137481;;True
+220137482;;False
+142699177;Rua de Damão;False
+75051376;Rua António Costa Reis;False
+75051410;Rua Horácio Marçal;False
+75051332;Rua António Costa Reis;False
+75051356;Rua Artur Napoleão;False
+154515206;Rua da Amieira;False
+154515196;Rua de Damão;False
+154515191;Rua de Damão;False
+75051474;;False
+75051444;Rua Avelar Brotero;False
+251257655;;False
+13714843;Rua do Monte dos Burgos;True
+168970944;;True
+168971037;;True
+27009984;Rua Nova do Seixo;True
+206871910;;True
+206871908;;True
+206871911;;True
+219537590;Estrada da Circunvalação;False
+253669172;Travessa de Ormuz;False
+253669171;Rua João José Cachofel;False
+154515201;Rua Central do Seixo;False
+154515197;Rua Central do Seixo;False
+253713339;;False
+253713341;;False
+253713337;Rua Mário Botas;False
+253713344;Travessa Mário Botas;False
+253713350;;False
+252339995;Rua Nova do Seixo;False
+37112931;Rua Nova do Tronco;False
+240884742;Rua da Telheira;False
+240990099;;False
+241284062;;False
+241284063;;False
+274187613;Rua Senhora do Porto;True
+283529762;;True
+219537591;;False
+308678900;;False
+308678905;;False
+308678911;;False
+308678912;;False
+308678915;;False
+308678932;;False
+142698177;;False
+142698169;;False
+142698170;;False
+308678908;;False
+309557715;;False
+309557716;;False
+75051346;Rua Henrique Medina;False
+309557717;;False
+309557714;;False
+316879353;Rua Carlos de Oliveira;False
+316879354;Rua Carlos de Oliveira;False
+316879355;Rua Central do Seixo;False
+316879356;Rua Henrique Medina;False
+316879357;Rua da Amieira;False
+316879358;Rua da Creche;False
+316879359;Rua da Realidade;False
+316879360;Rua da Realidade;False
+316879361;Travessa Central do Seixo;False
+316879363;Travessa Gil Eanes;False
+316879364;Travessa Nova do Seixo;False
+316879365;Travessa de Diu;False
+316879366;;False
+253669202;Rua Gil Eanes;False
+154515189;Rua de Damão;False
+154515204;Rua de Ormuz;False
+253669183;Travessa Carlos de Oliveira;False
+253669203;;False
+253669186;Rua Carlos de Oliveira;False
+75051388;Rua Filipe Magalhães;False
+75051423;;False
+220137480;;False
+75051418;;False
+317452390;Rua António Costa Reis;False
+317452396;Rua António Costa Reis;False
+317452394;Travessa António Ramalho;False
+142698156;Avenida das Congostas;False
+317808826;Praceta Henrique Medina;False
+317808828;Rua Henrique Medina;False
+317808829;Rua Henrique Medina;False
+317808831;Rua dos Fogueteiros;False
+317808832;Viela dos Fogueteiros;False
+317808836;;False
+317808830;Rua Nova dos Fogueteiros;False
+317811023;;False
+317811024;;False
+317811025;;False
+317811026;;False
+317811027;;False
+149939905;Rua de Santa Luzia;False
+351525663;Estrada da Circunvalação;False
+351525670;Estrada da Circunvalação;False
+351525677;Estrada da Circunvalação;False
+351525684;Rua da Telheira;False
+351525685;Rua da Telheira;False
+351525675;Estrada da Circunvalação;False
+351525769;;False
+351525777;;False
+166973018;Estrada da Circunvalação;False
+75051479;Rua Abade Correia da Serra;False
+252339799;;False
+240990100;;False
+240990101;;False
+308678937;;False
+280570946;Estrada da Circunvalação;False
+220137477;;False
+397645644;;False
+397645645;;False
+397645646;;False
+397645653;Praça de Malaca;False
+397645654;Praceta António Ribeiro;False
+397645658;;False

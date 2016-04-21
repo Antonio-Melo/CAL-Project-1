@@ -13,23 +13,28 @@
 using namespace std;
 
 StreetMap::StreetMap(string path) {
-	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str(), (path + "/info.txt").c_str());
+	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str(), (path + "/info.txt").c_str(), true);
 
 	generateGraph();
-
-	graph.floydWarshallShortestPath();
+	 cout << "Graph generated";
+	dist_graph.floydWarshallShortestPath();
+	time_graph.floydWarshallShortestPath();
+	dist_graph_no_tolls.floydWarshallShortestPath();
+	time_graph_no_tolls.floydWarshallShortestPath();
 }
 
 StreetMap::~StreetMap() {
 	// TODO Auto-generated destructor stub
 }
 
-void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path, const char *info_path){
+void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path, const char *info_path, bool show_status){
 	ifstream inFile;
 
 	//Read nodes
 	map<unsigned long int, int> tempconvN;
 	map<unsigned long int, int> tempconvR;
+	int count = 0;
+
 	inFile.open(nodes_path,std::fstream::in);
 
 	//Error opening nodes.txt
@@ -45,6 +50,8 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	int fakeIDN = 0, fakeIDR = 0;
 	double X_deg=0, X_rad = 0;
 	double Y_deg=0, Y_rad = 0;
+
+	if(show_status) cout << "Loading nodes..." << endl;
 
 	while(getline(inFile, line))
 	{
@@ -65,6 +72,8 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		nodes.insert(pair<int,Node>(fakeIDN,Node(X_deg, Y_deg, X_rad, Y_rad)));
 		tempconvN.insert(pair<unsigned long int, int>(idNode, fakeIDN));
 		fakeIDN++;
+
+		if (show_status) cout << count++ << endl;
 	}
 	//Close nodes.txt
 	inFile.close();
@@ -82,6 +91,9 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	unsigned long int idRoad = 0;
 	string nameRoad = "";
 	bool is2Way;
+
+	count = 0;
+	if(show_status) cout << "Loading roads..." << endl;
 
 	while(getline(inFile, line))
 	{
@@ -116,6 +128,8 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		roads.insert(pair<int,Road>(fakeIDR,Road(nameRoad, is2Way,rtype)));
 		tempconvR.insert(pair<unsigned long int, int>(idRoad, fakeIDR));
 		fakeIDR++;
+
+		if (show_status) cout << count++ << endl;
 	}
 
 	inFile.close();
@@ -134,6 +148,9 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	unsigned long int oNode = 0;
 	unsigned long int dNode = 0;
 
+	count = 0;
+	if(show_status) cout << "Loading subroads..." << endl;
+
 	while(getline(inFile, line))
 	{
 		stringstream linestream(line);
@@ -150,16 +167,20 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		if(roads.find(tempconvR.find(idRoad)->second)->second.getNodesID().size() == 0)
 			roads.find(tempconvR.find(idRoad)->second)->second.addNodeID(tempconvN.find(oNode)->second);
 		roads.find(tempconvR.find(idRoad)->second)->second.addNodeID(tempconvN.find(dNode)->second);
+
+		if (show_status) cout << count++ << endl;
 	}
 	//Closing file
 	inFile.close();
 
+	if (show_status) cout << "Subroads finished" << endl;
+
 	//Read Info
 	inFile.open(info_path,std::fstream::in);
 
-	//Error opening subroads.txt
+	//Error opening info.txt
 	if (!inFile) {
-		cerr << "Unable to open file subroads.txt";
+		cerr << "Unable to open file info.txt";
 		exit(4);   // call system to stop
 	}
 
@@ -196,8 +217,12 @@ void StreetMap::generateGraph() {
 
 	//Adding Vertexes
 	while(it != ite){
-		graph.addVertex(it->first);
+		dist_graph.addVertex(it->first);
+		time_graph.addVertex(it->first);
+		dist_graph_no_tolls.addVertex(it->first);
+		time_graph_no_tolls.addVertex(it->first);
 		it++;
+		cout << "nodes" << endl;
 	}
 
 	map<int, Road>::iterator itr = roads.begin();
@@ -209,12 +234,27 @@ void StreetMap::generateGraph() {
 			int id1 = itr->second.getNodesID()[i];
 			int id2 = itr->second.getNodesID()[i+1];
 			//distance calculation
-			double w = nodeDistance(&(nodes.find(id1)->second), &(nodes.find(id2)->second));
-			graph.addEdge(id1, id2, w);
-			if (itr->second.isIsTwoWay())
-				graph.addEdge(id2, id1, w);
-		}
+			double dist = nodeDistance(&(nodes.find(id1)->second), &(nodes.find(id2)->second));
+			double time = dist; //tem de ser adptado para cada estrada!!!!
 
+			dist_graph.addEdge(id1, id2, dist);
+			time_graph.addEdge(id1, id2, time);
+			if (itr->second.isIsTwoWay()){
+				dist_graph.addEdge(id2, id1, dist);
+				time_graph.addEdge(id2, id1, time);
+			}
+
+			//if it is highway it's not added to the no tolls graph
+			if (itr->second.getType() != HIGHWAY){
+				dist_graph_no_tolls.addEdge(id1, id2, dist);
+				time_graph_no_tolls.addEdge(id1, id2, time);
+				if (itr->second.isIsTwoWay()){
+					dist_graph_no_tolls.addEdge(id2, id1, dist);
+					time_graph_no_tolls.addEdge(id2, id1, time);
+				}
+			}
+		}
+		cout << "roads" << endl;
 		itr++;
 	}
 }
@@ -346,13 +386,13 @@ void StreetMap::write() {
 	}
 }
 
-const Graph<int>& StreetMap::getGraph() const {
+/*const Graph<int>& StreetMap::getGraph() const {
 	return graph;
 }
 
 void StreetMap::setGraph(const Graph<int>& graph) {
 	this->graph = graph;
-}
+}*/
 
 const vector<itineraryPoint>& StreetMap::getItinerary() const {
 	return itinerary;
@@ -459,12 +499,21 @@ int StreetMap::getNodeID(const string road1, const string road2){
 	return -1;
 }
 
-bool StreetMap::calculateItinerary() {
+bool StreetMap::calculateItinerary(bool dist, bool tolls) {
+	Graph<int> *graph;
 	path.clear();
 
+	if (dist && tolls) graph = &dist_graph;
+	else if (!dist && tolls) graph = &time_graph;
+	else if (dist && !tolls) graph = &dist_graph_no_tolls;
+	else if (!dist && !tolls) graph = &time_graph_no_tolls;
+
+
 	for(int i = 0; i < itinerary.size() - 1; i++){
-		if (!(calculateItineraryAux(itinerary[i].nodeID, itinerary[i+1].nodeID)))
+		if (!(calculateItineraryAux(itinerary[i].nodeID, itinerary[i+1].nodeID, graph))){
+			path.clear();
 			return false;
+		}
 	}
 
 	for (unsigned int i = 0; i < path.size(); i++){
@@ -474,9 +523,9 @@ bool StreetMap::calculateItinerary() {
 	return true;
 }
 
-bool StreetMap::calculateItineraryAux(int nodeID1, int nodeID2) {
+bool StreetMap::calculateItineraryAux(int nodeID1, int nodeID2, Graph<int> *graph) {
 	vector<int> tmp;
-	tmp = graph.getfloydWarshallPath(nodeID1, nodeID2);
+	tmp = graph->getfloydWarshallPath(nodeID1, nodeID2);
 
 	path.insert(path.end(), tmp.begin(), tmp.end());
 

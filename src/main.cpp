@@ -15,12 +15,8 @@ StreetMap *streetmap;
 
 
 void seeItinerary() {
-	string sel;
-	streetmap->addItinerary(56,"rua1");
-	streetmap->addItinerary(2,"rua2");
-	streetmap->calculateItinerary();
-	streetmap->write();
-	streetmap->draw();
+	string option;
+	streetmap->calculateItinerary(true, true);
 	streetmap->drawItinerary();
 	//streetmap->printItinerary();
 	//while(!cin.get());
@@ -128,19 +124,22 @@ int main(){
 
 	//system("CLS");
 
-	cout << "Loading Map" << endl;
+	cout << "Loading Map" << endl << endl;
 
 	//Creating a StreetMap based on the input
 	streetmap = new StreetMap("maps/" + map_folder);
+
+	streetmap->write();
+	streetmap->draw();
 
 	string selected = "";
 
 	while (selected != "0"){
 
 		if (streetmap->getItinerary().size() != 0){
-			cout << "------------------------------" << endl;
-			cout << "| #| Descriptor         |Node|" << endl;
-			cout << "------------------------------" << endl;
+			cout << "/--------------------------------------\\" << endl;
+			cout << "| #| Descriptor                  | Node|" << endl;
+			cout << "----------------------------------------" << endl;
 			for(unsigned int i = 0; i < streetmap->getItinerary().size(); i++){
 				cout << "|" << setw(2) << i << "|" << setw(20) << streetmap->getItinerary()[i].name << "|" << setw(4) << streetmap->getItinerary()[i].nodeID << "|" << endl;
 			}
@@ -149,15 +148,15 @@ int main(){
 		}
 
 		//Print menu
-		cout << "|----------------------------|" << endl;
-		cout << "|         Easy Pilot         |" << endl;
-		cout << "|                            |" << endl;
-		cout << "| 1. Calculate best way      |" << endl;
-		cout << "| 2. Add to Itinerary        |" << endl;
-		cout << "| 3. Remove from itinerary   |" << endl;
-		cout << "| 0. Exit                    |" << endl;
-		cout << "|                            |" << endl;
-		cout << "\\----------------------------/" << endl << endl;
+		cout << "|--------------------------------------|" << endl;
+		cout << "|              Easy Pilot              |" << endl;
+		cout << "|                                      |" << endl;
+		cout << "|   1. Calculate best way              |" << endl;
+		cout << "|   2. Add to Itinerary                |" << endl;
+		cout << "|   3. Remove from itinerary           |" << endl;
+		cout << "|   0. Exit                            |" << endl;
+		cout << "|                                      |" << endl;
+		cout << "\\--------------------------------------/" << endl << endl;
 
 		getline(cin,selected);
 		if (selected == "1"){
