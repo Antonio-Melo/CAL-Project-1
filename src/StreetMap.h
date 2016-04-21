@@ -15,11 +15,13 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <stdlib.h>
 
 #include <map>
 #include "Graph.h"
 #include "Node.h"
 #include "Road.h"
+#include "POI.h"
 
 using namespace std;
 
@@ -34,9 +36,10 @@ typedef struct itineraryPoint{
 class StreetMap {
 	map<int,Node> nodes;
 	map<int,Road> roads;
-	Graph<int> graph;
+	vector<POI> pois;
 	vector<itineraryPoint> itinerary;
 	vector<int> path;
+	Graph<int> graph;
 	double latMin, longMin, latMax, longMax;
 
 public:

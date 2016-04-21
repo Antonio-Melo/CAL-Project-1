@@ -10,7 +10,7 @@
 
 #include "Node.h"
 
-enum POIType{POMPGAS,RESTAURANT,HOTEL};
+enum POIType{POMPGAS,RESTAURANT,HOTEL,FAVORITE};
 
 class POI {
 	int  nodeID;
