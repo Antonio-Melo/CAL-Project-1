@@ -21,6 +21,7 @@ private:
 	bool is_two_way;
 	roadType type;//HIGHWAY or NATIONAL or ROUTE
 	vector<int> nodesID;
+	double price;
 public:
 	Road(string name,bool is,roadType type);
 	void addNodeID(int id);

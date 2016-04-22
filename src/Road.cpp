@@ -11,6 +11,11 @@ Road::Road(string name, bool is,roadType type) {
 	this->name = name;
 	is_two_way = is;
 	this->type = type;
+	if(type == HIGHWAY){
+		price = 0.1; // 0.1 euros per km
+	}else{
+		price = 0;
+	}
 }
 
 void Road::addNodeID(int id){
