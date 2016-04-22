@@ -50,7 +50,7 @@ class StreetMap {
 public:
 	StreetMap(string path);
 	virtual ~StreetMap();
-	void loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path, const char *info_path, bool show_status);
+	void loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path, bool show_status);
 	void generateGraph();
 	GraphViewer* draw();
 	void write();
