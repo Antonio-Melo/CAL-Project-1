@@ -94,7 +94,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	}
 
 	unsigned long int idRoad = 0;
-	string nameRoad = "";
+	string nameRoad;
 	bool is2Way;
 
 	count = 0;
@@ -116,12 +116,15 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 		getline(linestream, nameRoad, ';');  // read up-to the first ; (discard ;).
 
-		if (nameRoad.find("Autoestrada") == 0){
+		if (nameRoad.find("Autoestrada") != std::string::npos){
 			rtype = HIGHWAY;
-		} else if (nameRoad.find("Nacional") == 0){
+			cout << "HIGHWAY found! " <<endl;
+		} else if (nameRoad.find("Nacional") != std::string::npos){
 			rtype = NATIONAL;
+			cout << "NATIONAL found! " <<endl;
 		} else {
 			rtype = ROUTE;
+			cout << "ROAD found! " <<endl;
 		}
 
 		getline(linestream, data, ';');  // read up-to the first ; (discard ;).

@@ -1,0 +1,18 @@
+98835959;Rua Daciano Baptista Marques;True
+98835987;;False
+99016331;;False
+99016350;;False
+99016378;;False
+99016507;;False
+99016544;;False
+99016618;;False
+99016668;;False
+99016693;Autoestrada do Norte;False
+99016736;;False
+99016739;;False
+37406652;Autoestrada do Norte;False
+160528050;Rua Daciano Baptista Marques;True
+98835909;Rua Daciano Baptista Marques;False
+99016482;;False
+369859479;;False
+370332323;;False
