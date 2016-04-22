@@ -38,6 +38,10 @@ const vector<int> Road::getNodesID() const {
 	return nodesID;
 }
 
+const double Road::getPrice() const{
+	return price;
+}
+
 void Road::setIsTwoWay(bool isTwoWay) {
 	is_two_way = isTwoWay;
 }

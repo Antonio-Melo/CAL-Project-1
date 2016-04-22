@@ -29,6 +29,7 @@ public:
 	const string& getName() const;
 	const vector<int> getNodesID() const;
 	const roadType getType()const;
+	const double getPrice() const;
 	void setName(const string& name);
 	void setIsTwoWay(bool isTwoWay);
 	void setNodesID(const vector<int> nodesID);
