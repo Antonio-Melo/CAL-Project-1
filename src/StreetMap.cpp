@@ -13,10 +13,10 @@
 using namespace std;
 
 StreetMap::StreetMap(string path) {
-	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str(), true);
+	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str(), false);
 
 	generateGraph();
-	 cout << "Graph generated";
+	cout << "Graph generated !"<<endl;
 }
 
 StreetMap::~StreetMap() {
@@ -51,7 +51,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	latMin = INT_INFINITY;
 	latMax = -INT_INFINITY;
 
-	if(show_status) cout << "Loading nodes..." << endl;
+	cout << "Loading nodes..." << endl;
 
 	while(getline(inFile, line))
 	{
@@ -78,7 +78,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		if(X_deg < latMin) latMin = X_deg;
 		if(X_deg > latMax) latMax = X_deg;
 
-		if (show_status) cout << count++ << endl;
+		//if (show_status) cout << count++ << endl;
 	}
 	//Close nodes.txt
 	inFile.close();
@@ -98,7 +98,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	bool is2Way;
 
 	count = 0;
-	if(show_status) cout << "Loading roads..." << endl;
+	cout << "Loading roads..." << endl;
 
 	while(getline(inFile, line))
 	{
@@ -134,7 +134,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		tempconvR.insert(pair<unsigned long int, int>(idRoad, fakeIDR));
 		fakeIDR++;
 
-		if (show_status) cout << count++ << endl;
+		//if (show_status) cout << count++ << endl;
 	}
 
 	inFile.close();
@@ -154,7 +154,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	unsigned long int dNode = 0;
 
 	count = 0;
-	if(show_status) cout << "Loading subroads..." << endl;
+	cout << "Loading subroads..." << endl;
 
 	while(getline(inFile, line))
 	{
@@ -173,7 +173,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 			roads.find(tempconvR.find(idRoad)->second)->second.addNodeID(tempconvN.find(oNode)->second);
 		roads.find(tempconvR.find(idRoad)->second)->second.addNodeID(tempconvN.find(dNode)->second);
 
-		if (show_status) cout << count++ << endl;
+		//if (show_status) cout << count++ << endl;
 	}
 	//Closing file
 	inFile.close();
@@ -187,6 +187,8 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	if(nodes.size() > 100){
 		numofpois = nodes.size()/100 *numofpois;
 	}
+
+	cout << "Loading Points of Interest..." <<endl;
 
 	for(unsigned int i = 0;i < numofpois;i++){
 		//Restaurants
@@ -218,7 +220,7 @@ void StreetMap::generateGraph() {
 		dist_graph_no_tolls.addVertex(it->first);
 		time_graph_no_tolls.addVertex(it->first);
 		it++;
-		cout << "nodes" << endl;
+		//cout << "nodes" << endl;
 	}
 
 	map<int, Road>::iterator itr = roads.begin();
@@ -250,7 +252,7 @@ void StreetMap::generateGraph() {
 				}
 			}
 		}
-		cout << "roads" << endl;
+		//cout << "roads" << endl;
 		itr++;
 	}
 }
@@ -354,7 +356,7 @@ void StreetMap::drawItinerary(){
 		for(int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 15);
 			gv->rearrange();
-			Sleep(1000);
+			sleep(1);
 		}
 		for(int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 1);
@@ -471,8 +473,8 @@ int StreetMap::getNodeID(const string road){
 }
 
 int StreetMap::getNodeID(const string road1, const string road2){
-	vector<int> tmp1 = {};
-	vector<int> tmp2 = {};
+	vector<int> tmp1;
+	vector<int> tmp2;
 
 	map<int, Road>::iterator it = roads.begin();
 	map<int, Road>::iterator ite = roads.end();

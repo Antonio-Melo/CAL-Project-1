@@ -96,11 +96,15 @@ int main(){
 	struct dirent *ent;
 	string map_folder;
 	vector<string> maps;
-
-	cout << "Welcome to Easy Pilot!" << endl;
-	cout << "This is a simple 'GPS' that allows you to find the best way to your destination!" << endl;
-	cout << "(Please note that this doesn't track your current location.)" << endl << endl;
-	cout << "First of all enter the map you want to load (list of maps): " << endl;
+	cout << "_________________________________________________________________________________"  <<endl;
+	cout << "|                                                                                |"  <<endl;
+	cout << "|Easy Pilot CAL 2015/2016                                                        |" << endl;
+	cout << "|Welcome!                                                                        |" << endl;
+	cout << "|This is a simple 'GPS' that allows you to find the best way to your destination!|" << endl;
+	cout << "|(Please note that this doesn't track your current location.)                    |" << endl;
+	cout << "|By: António Melo & Jorge Vale & Telmo Barros                                    |" <<endl;
+	cout << "|________________________________________________________________________________|" << endl << endl;
+	cout << "First of all enter the map you want to load (list of maps):" << endl;
 
 	if ((dir = opendir ("maps")) != NULL) {
 		/* print all the files and directories within directory */
@@ -132,7 +136,7 @@ int main(){
 	//Creating a StreetMap based on the input
 	streetmap = new StreetMap("maps/" + map_folder);
 
-	streetmap->write();
+	//streetmap->write();
 	streetmap->draw();
 
 	string selected = "";
@@ -140,9 +144,9 @@ int main(){
 	while (selected != "0"){
 
 		if (streetmap->getItinerary().size() != 0){
-			cout << "/--------------------------------------\\" << endl;
+			cout << "_______________________________________" << endl;
 			cout << "| #| Descriptor                  | Node|" << endl;
-			cout << "----------------------------------------" << endl;
+			cout << "|________________________________|_____|" << endl;
 			for(unsigned int i = 0; i < streetmap->getItinerary().size(); i++){
 				cout << "|" << setw(2) << i << "|" << setw(20) << streetmap->getItinerary()[i].name << "|" << setw(4) << streetmap->getItinerary()[i].nodeID << "|" << endl;
 			}
@@ -151,7 +155,8 @@ int main(){
 		}
 
 		//Print menu
-		cout << "|--------------------------------------|" << endl;
+		cout << "_______________________________________"  << endl;
+		cout << "|                                      |" << endl;
 		cout << "|              Easy Pilot              |" << endl;
 		cout << "|                                      |" << endl;
 		cout << "|   1. Calculate best way              |" << endl;
@@ -159,7 +164,7 @@ int main(){
 		cout << "|   3. Remove from itinerary           |" << endl;
 		cout << "|   0. Exit                            |" << endl;
 		cout << "|                                      |" << endl;
-		cout << "\\--------------------------------------/" << endl << endl;
+		cout << "|______________________________________|" << endl << endl;
 
 		getline(cin,selected);
 		if (selected == "1"){
