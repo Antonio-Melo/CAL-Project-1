@@ -29,6 +29,9 @@
 #define LIGHT_GRAY "LIGHT_GRAY"
 #define MAGENTA "MAGENTA"
 
+#define DEFAULT_WIDTH 1000
+#define DEFAULT_HEIGHT 800
+
 /**
  * Classe que guarda o grafo e o representa. Todas as suas funções retornam um booleano a indicar
  * se a sua execução decorreu ou não com sucesso.

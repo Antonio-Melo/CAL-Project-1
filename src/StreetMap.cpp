@@ -13,21 +13,17 @@
 using namespace std;
 
 StreetMap::StreetMap(string path) {
-	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str(), (path + "/info.txt").c_str(), true);
+	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str(), true);
 
 	generateGraph();
 	 cout << "Graph generated";
-	dist_graph.floydWarshallShortestPath();
-	time_graph.floydWarshallShortestPath();
-	dist_graph_no_tolls.floydWarshallShortestPath();
-	time_graph_no_tolls.floydWarshallShortestPath();
 }
 
 StreetMap::~StreetMap() {
 	// TODO Auto-generated destructor stub
 }
 
-void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path, const char *info_path, bool show_status){
+void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, const char *subroads_path, bool show_status){
 	ifstream inFile;
 
 	//Read nodes
@@ -50,6 +46,10 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	int fakeIDN = 0, fakeIDR = 0;
 	double X_deg=0, X_rad = 0;
 	double Y_deg=0, Y_rad = 0;
+	longMin = INT_INFINITY;
+	longMax = -INT_INFINITY;
+	latMin = INT_INFINITY;
+	latMax = -INT_INFINITY;
 
 	if(show_status) cout << "Loading nodes..." << endl;
 
@@ -72,6 +72,11 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		nodes.insert(pair<int,Node>(fakeIDN,Node(X_deg, Y_deg, X_rad, Y_rad)));
 		tempconvN.insert(pair<unsigned long int, int>(idNode, fakeIDN));
 		fakeIDN++;
+
+		if(Y_deg < longMin) longMin = Y_deg;
+		if(Y_deg > longMax) longMax = Y_deg;
+		if(X_deg < latMin) latMin = X_deg;
+		if(X_deg > latMax) latMax = X_deg;
 
 		if (show_status) cout << count++ << endl;
 	}
@@ -173,42 +178,6 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	//Closing file
 	inFile.close();
 
-	if (show_status) cout << "Subroads finished" << endl;
-
-	//Read Info
-	inFile.open(info_path,std::fstream::in);
-
-	//Error opening info.txt
-	if (!inFile) {
-		cerr << "Unable to open file info.txt";
-		exit(4);   // call system to stop
-	}
-
-	getline(inFile, line);
-
-	stringstream line1(line);
-			string data;
-			string info;
-
-			line1 >> latMin;
-
-			getline(line1, data, ';');  // read up-to the first ; (discard ;).
-			line1 >> latMax;
-
-			getline(inFile, line);
-			stringstream line2(line);
-
-			line2 >> longMin;
-			getline(line2, data, ';'); //read name of road and discard ;
-			line2 >> longMax;
-
-			getline(inFile, info);
-
-		//Closing file
-		inFile.close();
-
-
-
 }
 
 void StreetMap::generateGraph() {
@@ -271,14 +240,12 @@ double nodeDistance(Node *n1, Node *n2) {
 }
 
 GraphViewer* StreetMap::draw() {
-	GraphViewer *gv = new GraphViewer(600, 600, false);
+	GraphViewer *gv = new GraphViewer(DEFAULT_WIDTH, DEFAULT_HEIGHT, false);
 
 	gv->setBackground("background.jpg");
 
-	gv->createWindow(600, 600);
+	gv->createWindow(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	int pixelY, pixelX;
-	//= ((targetLat - minLat) / (maxLat - minLat)) * (maxYPixel - minYPixel)
-
 
 	gv->defineVertexColor("blue");
 	gv->defineEdgeCurved(false);
@@ -288,9 +255,10 @@ GraphViewer* StreetMap::draw() {
 	map<int, Node>::iterator ite = nodes.end();
 
 	while(it != ite){
-		pixelY = ((it->second.getLatitudeDeg() - latMin) / (latMax - latMin)) * (600);
-		pixelX = ((it->second.getLongitudeDeg() - longMin)/ (longMax - longMin))*(600);
-		gv->addNode(it->first,pixelX, -pixelY);
+
+		pixelY = ((it->second.getLatitudeDeg() - latMin) / (latMax - latMin)) * (-DEFAULT_HEIGHT) + DEFAULT_HEIGHT;
+		pixelX = ((it->second.getLongitudeDeg() - longMin)/ (longMax - longMin))*(DEFAULT_WIDTH);
+		gv->addNode(it->first,pixelX, pixelY);
 		gv->setVertexSize(it->first,1);
 		it++;
 	}
@@ -328,7 +296,7 @@ GraphViewer* StreetMap::draw() {
 				gv->setEdgeLabel(edgeID, itr->second.getName());
 			}
 
-			gv->setEdgeThickness(edgeID,5);
+			gv->setEdgeThickness(edgeID,2);
 			edgeID++;
 		}
 		itr++;
@@ -525,7 +493,13 @@ bool StreetMap::calculateItinerary(bool dist, bool tolls) {
 
 bool StreetMap::calculateItineraryAux(int nodeID1, int nodeID2, Graph<int> *graph) {
 	vector<int> tmp;
-	tmp = graph->getfloydWarshallPath(nodeID1, nodeID2);
+	//tmp = graph->getfloydWarshallPath(nodeID1, nodeID2);
+
+	graph->dijkstraShortestPath(nodeID1);
+	tmp = graph->getPath(nodeID1,nodeID2);
+	/*time_graph.dijkstraShortestPath();
+	dist_graph_no_tolls.dijkstraShortestPath();
+	time_graph_no_tolls.dijkstraShortestPath();*/
 
 	path.insert(path.end(), tmp.begin(), tmp.end());
 
