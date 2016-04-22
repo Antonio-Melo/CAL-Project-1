@@ -69,6 +69,8 @@ public:
 	bool calculateItinerary(bool dist, bool tolls);
 	bool calculateItineraryAux(int nodeID1, int nodeID2, Graph<int> *graph);
 	void drawItinerary();
+	const vector<POI>& getPois() const;
+	void setPois(const vector<POI>& pois);
 };
 
 double nodeDistance(Node *n1, Node *n2);

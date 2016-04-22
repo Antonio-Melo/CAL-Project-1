@@ -178,6 +178,33 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	//Closing file
 	inFile.close();
 
+
+	//Choose random POI's
+	int numofpois=2;
+	int idPois =0;
+	int n;
+	srand (time(NULL));
+	if(nodes.size() > 100){
+		numofpois = nodes.size()/100 *numofpois;
+	}
+
+	for(unsigned int i = 0;i < numofpois;i++){
+		//Restaurants
+		n = rand() % nodes.size();
+		POI rest = POI(n,RESTAURANT);
+		pois.push_back(rest);
+
+		//Pomp Gas
+		n = rand() % nodes.size();
+		POI pomp = POI(n,POMPGAS);
+		pois.push_back(pomp);
+
+		//Hotels
+		n = rand() % nodes.size();
+		POI hotel = POI(n,POMPGAS);
+		pois.push_back(hotel);
+	}
+
 }
 
 void StreetMap::generateGraph() {
@@ -305,6 +332,14 @@ GraphViewer* StreetMap::draw() {
 
 	gv->rearrange();
 	return gv;
+}
+
+const vector<POI>& StreetMap::getPois() const {
+	return pois;
+}
+
+void StreetMap::setPois(const vector<POI>& pois) {
+	this->pois = pois;
 }
 
 void StreetMap::drawItinerary(){

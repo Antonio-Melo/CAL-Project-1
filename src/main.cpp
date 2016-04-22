@@ -72,8 +72,11 @@ void addItineraryPoint() {
 	} else if (option == "4"){
 		string poi;
 		cout << "POI:" << endl;
+		for (int i = 0; i < streetmap->getPois().size(); i++){
+			//cout << i << ": " << streetmap->getPois()[i].getName();
+		}
 		getline(cin,poi);
-		//streetmap->addItinerary(id, poi); //falta funcao get nodeID by POI name
+		streetmap->addItinerary(id, poi); //falta funcao get nodeID by POI name
 	}
 }
 
