@@ -359,7 +359,7 @@ void StreetMap::drawItinerary(){
 		for(int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 15);
 			gv->rearrange();
-			sleep(1);
+			Sleep(1000);
 		}
 		for(int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 1);
@@ -413,10 +413,6 @@ const map<int, Node>& StreetMap::getNodes() const {
 	return nodes;
 }
 
-void StreetMap::setNodes(const map<int, Node>& nodes) {
-	this->nodes = nodes;
-}
-
 const map<int, Road>& StreetMap::getRoads() const {
 	return roads;
 }
@@ -442,10 +438,6 @@ bool StreetMap::removeItinerary(const unsigned int index) {
 	}
 	return false;
 	//return tmp;
-}
-
-void StreetMap::setRoads(const map<int, Road>& roads) {
-	this->roads = roads;
 }
 
 int StreetMap::getNodeID(const string road){

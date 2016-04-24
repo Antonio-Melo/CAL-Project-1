@@ -13,7 +13,10 @@ using namespace std;
 
 StreetMap *streetmap;
 
-
+/**
+ * Interface to select itinerary mode (distance or time, with or without tolls)
+ * Shows itinerary graphically
+ */
 void seeItinerary() {
 	string option;
 	streetmap->calculateItinerary(true, true);
@@ -22,6 +25,10 @@ void seeItinerary() {
 	//while(!cin.get());
 }
 
+/**
+ * Adds point to itinerary
+ * A new point can be added by giving its ID, road name, roads intersections or POI
+ */
 void addItineraryPoint() {
 	string option = "";
 	while (option != "1" && option != "2" && option != "3" && option != "4" && option != "0"){
@@ -80,6 +87,9 @@ void addItineraryPoint() {
 	}
 }
 
+/**
+ * Removes point from current itinerary by giving index
+ */
 void removeItineraryPoint() {
 	int index = -1;
 	cout << "Insert index to remove from itinerary: " << endl;
@@ -90,7 +100,14 @@ void removeItineraryPoint() {
 
 }
 
-
+/**
+ * Point of entry to the program
+ * Interface to select map
+ * Load map
+ * Calculate best way to travel the itinerary
+ * Add new pooint to the itinerary
+ * Remove point from the itinerary
+ */
 int main(){
 	DIR *dir;
 	struct dirent *ent;
