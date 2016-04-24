@@ -185,7 +185,7 @@ int main(){
 
 		getline(cin,selected);
 		if (selected == "1"){
-			if(streetmap->getItinerary().size() >= 0){
+			if(streetmap->getItinerary().size() >= 2){
 				seeItinerary();
 			} else {
 				cout << "Itinerary must have at least 2 points." << endl;
