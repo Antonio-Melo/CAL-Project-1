@@ -199,7 +199,6 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		n = rand() % nodes.size();
 		POI rest = POI(n,RESTAURANT);
 		pois.push_back(rest);
-		//nodes.at(n).setVertexIcon();
 
 		//Pomp Gas
 		n = rand() % nodes.size();
@@ -379,15 +378,18 @@ void StreetMap::drawItinerary(){
 		gv->addEdge();
 		gv->setEdgeColor();
 	}*/
+
 	gv->defineVertexColor(YELLOW);
 	while(1){
 		for(unsigned int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 15);
+			gv->setVertexIcon(path[i],"car.png");
 			gv->rearrange();
 			Sleep(1000);
 		}
 		for(unsigned int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 1);
+			gv->setVertexIcon(path[i],"background.jpg");
 		}
 		gv->rearrange();
 	}
