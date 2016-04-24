@@ -163,7 +163,7 @@ int main(){
 		if (streetmap->getItinerary().size() != 0){
 			cout << "_______________________________________" << endl;
 			cout << "| #| Descriptor                  | Node|" << endl;
-			cout << "|________________________________|_____|" << endl;
+			cout << "|__|_____________________________|_____|" << endl;
 			for(unsigned int i = 0; i < streetmap->getItinerary().size(); i++){
 				cout << "|" << setw(2) << i << "|" << setw(20) << streetmap->getItinerary()[i].name << "|" << setw(4) << streetmap->getItinerary()[i].nodeID << "|" << endl;
 			}

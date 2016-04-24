@@ -185,7 +185,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	//Choose random POI's
 	int numofpois=2;
-	int idPois =0;
+	//int idPois =0;
 	int n;
 	srand (time(NULL));
 	if(nodes.size() > 100){
@@ -194,11 +194,12 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	cout << "Loading Points of Interest..." <<endl;
 
-	for(unsigned int i = 0;i < numofpois;i++){
+	for(int i = 0;i < numofpois;i++){
 		//Restaurants
 		n = rand() % nodes.size();
 		POI rest = POI(n,RESTAURANT);
 		pois.push_back(rest);
+		//nodes.at(n).setVertexIcon();
 
 		//Pomp Gas
 		n = rand() % nodes.size();
@@ -293,6 +294,29 @@ GraphViewer* StreetMap::draw() {
 		pixelX = ((it->second.getLongitudeDeg() - longMin)/ (longMax - longMin))*(DEFAULT_WIDTH);
 		gv->addNode(it->first,pixelX, pixelY);
 		gv->setVertexSize(it->first,1);
+		for(unsigned int i =0;i < pois.size();i++){
+			if(pois.at(i).getNodeID() == it->first){
+				gv->setVertexSize(it->first, 15);
+				switch(pois.at(i).getType()){
+				case POMPGAS:
+					gv->setVertexIcon(it->first,"gastation.png");
+					break;
+				case RESTAURANT:
+					gv->setVertexIcon(it->first,"dinner.png");
+					break;
+				case HOTEL:
+					gv->setVertexIcon(it->first,"hotel.jpg");
+					break;
+				case FAVORITE:
+					gv->setVertexIcon(it->first,"favourite.png");
+					break;
+				default:
+					break;
+				}
+				break;
+			}
+		}
+
 		it++;
 	}
 
@@ -357,12 +381,12 @@ void StreetMap::drawItinerary(){
 	}*/
 	gv->defineVertexColor(YELLOW);
 	while(1){
-		for(int i = 0; i < path.size(); i++){
+		for(unsigned int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 15);
 			gv->rearrange();
 			Sleep(1000);
 		}
-		for(int i = 0; i < path.size(); i++){
+		for(unsigned int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 1);
 		}
 		gv->rearrange();

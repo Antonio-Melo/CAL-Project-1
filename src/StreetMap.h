@@ -47,8 +47,8 @@ typedef struct itineraryPoint{
 class StreetMap {
 	map<int,Node> nodes;
 	map<int,Road> roads;
-
 	vector<POI> pois;
+
 	Graph<int> dist_graph;
 	Graph<int> time_graph;
 	Graph<int> dist_graph_no_tolls;
