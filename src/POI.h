@@ -10,15 +10,37 @@
 
 #include "Node.h"
 
+/**
+ * enum used to represent a type of a Point of Interest
+ */
 enum POIType{POMPGAS,RESTAURANT,HOTEL,FAVORITE};
 
+/**
+ *
+ */
 class POI {
 	int  nodeID;
 	POIType type;
 public:
+	/**
+	 * POI constructor to generate points of interest
+	 * @param int id that represents the id of Point of Interest
+	 * @param POIType type that represents the type of Point of Interest
+	 */
 	POI(int id, POIType type);
+	/**
+	 * POI destructor
+	 */
 	virtual ~POI();
+	/**
+	 * Returns id of POI
+	 * @return int with id of POI
+	 */
 	const int getNodeID() const;
+	/**
+	 * Returns type of POI
+	 * @return POIType with type of POI
+	 */
 	const POIType getType() const;
 };
 

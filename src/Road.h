@@ -29,7 +29,9 @@ private:
 public:
 	/**
 	 * Road constructor to generate roads
-	 * @param string name that represents name of the road, bool is that represents if the road is two ways or not, and the roadType to represent the type of the road
+	 * @param string name that represents name of the road
+	 * @param bool is that represents if the road is two ways or not
+	 * @param roadType to represent the type of the road
 	 */
 	Road(string name,bool is,roadType type);
 	/**
