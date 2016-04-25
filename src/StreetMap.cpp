@@ -362,7 +362,7 @@ GraphViewer* StreetMap::draw() {
 	return gv;
 }
 
-const vector<POI>& StreetMap::getPois() const {
+const vector<POI>& StreetMap::getPois() const{
 	return pois;
 }
 
@@ -569,17 +569,23 @@ void StreetMap::insertPOI(POI p, GraphViewer* gv){
 	gv->rearrange();
 }
 
-vector<POI*> StreetMap::closestPOIs(POIType type){
+
+int StreetMap::closestPOIs(POIType type){
+
 	double distance = INT_INFINITY;
 	itineraryPoint iP;
+	int id;
 	iP = itinerary[itinerary.size()-1];
 
 	for(int i = 0; i < pois.size(); i++){
 		if(pois[i].getType() == type){
-		if(distance > nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second))
+		if(distance > nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second)){
 			distance = nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second);
+			 id = pois[i].getNodeID();
+			}
 		}
 	}
+	return id;
 }
 
 

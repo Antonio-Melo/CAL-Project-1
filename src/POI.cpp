@@ -23,3 +23,13 @@ const int POI::getNodeID() const{
 const POIType POI::getType() const{
 		return type;
 }
+const string POI::toString() const{
+	switch(type){
+	case 'POMPGAS':
+		return "POMPGAS";
+	case 'RESTAURANT':
+		return "RESTAURANT";
+	case 'HOTEL':
+		return "HOTEL";
+	}
+}
