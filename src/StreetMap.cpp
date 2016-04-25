@@ -559,6 +559,7 @@ bool StreetMap::calculateItinerary(bool dist, bool tolls) {
 	//else if (!dist && !tolls) graph = &time_graph_no_tolls;
 
 
+
 	for(unsigned int i = 0; i < itinerary.size() - 1; i++){
 		if (!(calculateItineraryAux(itinerary[i].nodeID, itinerary[i+1].nodeID, dist, tolls))){
 			path.clear();
