@@ -142,6 +142,9 @@ void removeItineraryPoint() {
 
 }
 
+/**
+ * Insert new POI into map
+ */
 void insertPoi(GraphViewer* gv){
 	int id;
 	bool found= false;
