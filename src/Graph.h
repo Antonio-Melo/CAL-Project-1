@@ -38,7 +38,7 @@ public:
 	Vertex(T in);
 	friend class Graph<T>;
 
-	void addEdge(Vertex<T> *dest, double w);
+	void addEdge(Vertex<T> *dest, double d, double t, bool to);
 	bool removeEdgeTo(Vertex<T> *d);
 
 	T getInfo() const;
@@ -84,8 +84,8 @@ Vertex<T>::Vertex(T in): info(in), visited(false), processing(false), indegree(0
 
 
 template <class T>
-void Vertex<T>::addEdge(Vertex<T> *dest, double w) {
-	Edge<T> edgeD(dest,w);
+void Vertex<T>::addEdge(Vertex<T> *dest, double d, double t, bool to) {
+	Edge<T> edgeD(dest, d, t, to);
 	adj.push_back(edgeD);
 }
 
@@ -121,15 +121,17 @@ int Vertex<T>::getIndegree() const {
 template <class T>
 class Edge {
 	Vertex<T> * dest;
-	double weight;
+	double distance;
+	double time;
+	bool toll;
 public:
-	Edge(Vertex<T> *d, double w);
+	Edge(Vertex<T> *d, double di, double t, bool to);
 	friend class Graph<T>;
 	friend class Vertex<T>;
 };
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *d, double w): dest(d), weight(w){}
+Edge<T>::Edge(Vertex<T> *d, double di, double t, bool to): dest(d), distance(di), time(t), toll(to){}
 
 
 
@@ -151,12 +153,12 @@ class Graph {
 	void getPathTo(Vertex<T> *origin, list<T> &res);
 
 	//exercicio 6
-	int ** W;   //weight
+	int ** W;   //dist
 	int ** P;   //path
 
 public:
 	bool addVertex(const T &in);
-	bool addEdge(const T &sourc, const T &dest, double w);
+	bool addEdge(const T &sourc, const T &dest, double d, double t, bool to);
 	bool removeVertex(const T &in);
 	bool removeEdge(const T &sourc, const T &dest);
 	vector<T> dfs() const;
@@ -177,7 +179,7 @@ public:
 
 	//exercicio 6
 	void bellmanFordShortestPath(const T &s);
-	void dijkstraShortestPath(const T &s);
+	void dijkstraShortestPath(const T &s, bool byDist, bool withTolls);
 	void floydWarshallShortestPath();
 	int edgeCost(int vOrigIndex, int vDestIndex);
 	vector<T> getfloydWarshallPath(const T &origin, const T &dest);
@@ -244,7 +246,7 @@ bool Graph<T>::removeVertex(const T &in) {
 }
 
 template <class T>
-bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addEdge(const T &sourc, const T &dest, double d, double t, bool to) {
 	typename vector<Vertex<T>*>::iterator it= vertexSet.begin();
 	typename vector<Vertex<T>*>::iterator ite= vertexSet.end();
 	int found=0;
@@ -258,7 +260,7 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
 	}
 	if (found!=2) return false;
 	vD->indegree++;
-	vS->addEdge(vD,w);
+	vS->addEdge(vD,d,t,to);
 
 	return true;
 }
@@ -608,11 +610,11 @@ void Graph<T>::bellmanFordShortestPath(const T &s) {
 		v = q.front(); q.pop();
 		for(unsigned int i = 0; i < v->adj.size(); i++) {
 			Vertex<T>* w = v->adj[i].dest;
-			if(v->dist + v->adj[i].weight < w->dist) {
-				w->dist = v->dist + v->adj[i].weight;
+			//if(v->dist + v->adj[i].distance < w->dist) {
+				w->dist = v->dist + v->adj[i].distance;
 				w->path = v;
 				q.push(w);
-			}
+			//}
 		}
 	}
 }
@@ -622,7 +624,7 @@ void Graph<T>::bellmanFordShortestPath(const T &s) {
 
 
 template<class T>
-void Graph<T>::dijkstraShortestPath(const T &s) {
+void Graph<T>::dijkstraShortestPath(const T &s, bool byDist, bool withTolls) {
 
 	for(unsigned int i = 0; i < vertexSet.size(); i++) {
 		vertexSet[i]->path = NULL;
@@ -638,6 +640,7 @@ void Graph<T>::dijkstraShortestPath(const T &s) {
 
 	make_heap(pq.begin(), pq.end());
 
+	double weight;
 
 	while( !pq.empty() ) {
 
@@ -648,9 +651,15 @@ void Graph<T>::dijkstraShortestPath(const T &s) {
 		for(unsigned int i = 0; i < v->adj.size(); i++) {
 			Vertex<T>* w = v->adj[i].dest;
 
-			if(v->dist + v->adj[i].weight < w->dist ) {
+			if (byDist){
+				weight = v->adj[i].distance;
+			} else {
+				weight = v->adj[i].time;
+			}
 
-				w->dist = v->dist + v->adj[i].weight;
+			if((v->dist + weight) < w->dist && v->adj[i].toll) {
+
+				w->dist = v->dist + weight;
 				w->path = v;
 
 				//se já estiver na lista, apenas a actualiza
@@ -675,7 +684,7 @@ int Graph<T>::edgeCost(int vOrigIndex, int vDestIndex)
 	for(unsigned int i = 0; i < vertexSet[vOrigIndex]->adj.size(); i++)
 	{
 		if(vertexSet[vOrigIndex]->adj[i].dest == vertexSet[vDestIndex])
-			return vertexSet[vOrigIndex]->adj[i].weight;
+			return vertexSet[vOrigIndex]->adj[i].distance;
 	}
 
 	return INT_INFINITY;

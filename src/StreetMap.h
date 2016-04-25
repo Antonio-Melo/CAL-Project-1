@@ -42,20 +42,20 @@ typedef struct itineraryPoint{
 };
 
 /**
- *
+ * Class that stor all nodes, roads, POI's, graph with 'map and itinerary
  */
 class StreetMap {
 	map<int,Node> nodes;
 	map<int,Road> roads;
-
 	vector<POI> pois;
-	Graph<int> dist_graph;
-	Graph<int> time_graph;
-	Graph<int> dist_graph_no_tolls;
-	Graph<int> time_graph_no_tolls;
+
+	//Graph<int> dist_graph;
+	//Graph<int> time_graph;
+	//Graph<int> dist_graph_no_tolls;
+	//Graph<int> time_graph_no_tolls;
+	Graph<int> graph;
 	vector<itineraryPoint> itinerary;
 	vector<int> path;
-	Graph<int> graph;
 	double latMin, longMin, latMax, longMax;
 
 public:
@@ -155,7 +155,7 @@ public:
 	 * @param graph Graph to search
 	 * @return True if the destination node is reachable from the source node
 	 */
-	bool calculateItineraryAux(int nodeID1, int nodeID2, Graph<int> *graph);
+	bool calculateItineraryAux(int nodeID1, int nodeID2, bool dist, bool tolls);
 	/**
 	 * Draws a animation to explain the path
 	 * Continuation of draw funtion
@@ -171,7 +171,17 @@ public:
 	 * @param pois New vector to set
 	 */
 	void setPois(const vector<POI>& pois);
+	/**
+	 * Adds POI to the existing POIs
+	 */
+	void insertPOI(POI p,GraphViewer* gv);
+	/**
+	 * Returns node ID of the closest POI to the last point in the itinerary with a certain type
+	 * @param type Type of POI to search the closest
+	 * @retrun Node ID of the closest POI
+	 */
 	int closestPOIs(POIType type);
+
 };
 
 /**
