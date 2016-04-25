@@ -171,6 +171,7 @@ public:
 	 * @param pois New vector to set
 	 */
 	void setPois(const vector<POI>& pois);
+	void insertPOI(POI p,GraphViewer* gv);
 };
 
 /**

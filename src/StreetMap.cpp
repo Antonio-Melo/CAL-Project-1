@@ -185,7 +185,6 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	//Choose random POI's
 	int numofpois=2;
-	//int idPois =0;
 	int n;
 	srand (time(NULL));
 	if(nodes.size() > 100){
@@ -535,7 +534,7 @@ bool StreetMap::calculateItinerary(bool dist, bool tolls) {
 	else if (!dist && !tolls) graph = &time_graph_no_tolls;
 
 
-	for(int i = 0; i < itinerary.size() - 1; i++){
+	for(unsigned int i = 0; i < itinerary.size() - 1; i++){
 		if (!(calculateItineraryAux(itinerary[i].nodeID, itinerary[i+1].nodeID, graph))){
 			path.clear();
 			return false;
@@ -562,4 +561,10 @@ bool StreetMap::calculateItineraryAux(int nodeID1, int nodeID2, Graph<int> *grap
 	path.insert(path.end(), tmp.begin(), tmp.end());
 
 	return (path.size() != 0);
+}
+
+void StreetMap::insertPOI(POI p, GraphViewer* gv){
+	pois.push_back(p);
+	gv->setVertexIcon(p.getNodeID(),"favourite.png");
+	gv->rearrange();
 }
