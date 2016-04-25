@@ -103,6 +103,7 @@
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+<<<<<<< HEAD
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.debug.1436905506;cdt.managedbuild.config.gnu.exe.debug.1436905506.;cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1270570254;cdt.managedbuild.tool.gnu.cpp.compiler.input.2032603394">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
@@ -112,16 +113,21 @@
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.debug.1436905506;cdt.managedbuild.config.gnu.exe.debug.1436905506.;cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1191487704;cdt.managedbuild.tool.gnu.c.compiler.input.1679269826">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
+=======
+>>>>>>> branch 'master' of https://github.com/Antonio-Melo/CAL-Project-1.git
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.2030946124;cdt.managedbuild.config.gnu.mingw.exe.release.2030946124.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.release.640148394;cdt.managedbuild.tool.gnu.cpp.compiler.input.1816996593">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.326348101;cdt.managedbuild.config.gnu.mingw.exe.debug.326348101.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.1507362589;cdt.managedbuild.tool.gnu.c.compiler.input.1656377582">
+<<<<<<< HEAD
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.2030946124;cdt.managedbuild.config.gnu.mingw.exe.release.2030946124.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release.1869581513;cdt.managedbuild.tool.gnu.c.compiler.input.335395911">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.243261855;cdt.managedbuild.config.gnu.exe.release.243261855.;cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.994786469;cdt.managedbuild.tool.gnu.cpp.compiler.input.1586218793">
+=======
+>>>>>>> branch 'master' of https://github.com/Antonio-Melo/CAL-Project-1.git
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.326348101;cdt.managedbuild.config.gnu.mingw.exe.debug.326348101.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.1378007414;cdt.managedbuild.tool.gnu.cpp.compiler.input.1751962051">

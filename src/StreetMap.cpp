@@ -185,7 +185,6 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	//Choose random POI's
 	int numofpois=2;
-	//int idPois =0;
 	int n;
 	srand (time(NULL));
 	if(nodes.size() > 100){
@@ -388,7 +387,7 @@ GraphViewer* StreetMap::draw() {
 	return gv;
 }
 
-const vector<POI>& StreetMap::getPois() const {
+const vector<POI>& StreetMap::getPois() const{
 	return pois;
 }
 
