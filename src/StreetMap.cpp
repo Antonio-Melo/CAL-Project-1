@@ -404,7 +404,8 @@ void StreetMap::drawItinerary(){
 	}*/
 
 	gv->defineVertexColor(YELLOW);
-	while(1){
+	string option = "A";
+	while(option != "B"){
 		for(unsigned int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 15);
 			gv->setVertexIcon(path[i],"car.png");
@@ -416,6 +417,9 @@ void StreetMap::drawItinerary(){
 			gv->setVertexIcon(path[i],"background.jpg");
 		}
 		gv->rearrange();
+		cout << "Insert 'B' to go back to menu or other to repeat the animation" << endl;
+		cin.ignore();
+		getline(cin, option);
 	}
 }
 
@@ -605,9 +609,9 @@ int StreetMap::closestPOIs(POIType type){
 
 	for(int i = 0; i < pois.size(); i++){
 		if(pois[i].getType() == type){
-		if(distance > nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second)){
-			distance = nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second);
-			 id = pois[i].getNodeID();
+			if(distance > nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second)){
+				distance = nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second);
+				id = pois[i].getNodeID();
 			}
 		}
 	}
