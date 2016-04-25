@@ -171,6 +171,7 @@ public:
 	 * @param pois New vector to set
 	 */
 	void setPois(const vector<POI>& pois);
+	vector<POI*> closestPOIs(POIType type);
 };
 
 /**
@@ -179,6 +180,6 @@ public:
  * @param n2 Second node
  * @return Distance between nodes in km(kilometers)
  */
-double nodeDistance(Node *n1, Node *n2);
+	double nodeDistance(Node *n1, Node *n2);
 
 #endif /* SRC_STREETMAP_H_ */
