@@ -42,7 +42,7 @@ typedef struct itineraryPoint{
 };
 
 /**
- *
+ * Class that stor all nodes, roads, POI's, graph with 'map and itinerary
  */
 class StreetMap {
 	map<int,Node> nodes;
@@ -171,7 +171,15 @@ public:
 	 * @param pois New vector to set
 	 */
 	void setPois(const vector<POI>& pois);
+	/**
+	 * Adds POI to the existing POIs
+	 */
 	void insertPOI(POI p,GraphViewer* gv);
+	/**
+	 * Returns node ID of the closest POI to the last point in the itinerary with a certain type
+	 * @param type Type of POI to search the closest
+	 * @retrun Node ID of the closest POI
+	 */
 	int closestPOIs(POIType type);
 
 };
