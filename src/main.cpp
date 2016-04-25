@@ -20,6 +20,7 @@ StreetMap *streetmap;
  */
 void seeItinerary() {
 	string option;
+	streetmap->calculateItinerary(true, false);
 	bool asd1,asd2;
 	cout << "Best way by time or distance?(T/D)";
 	cin >> option;
@@ -161,7 +162,7 @@ int main(){
 	cout << "|Welcome!                                                                        |" << endl;
 	cout << "|This is a simple 'GPS' that allows you to find the best way to your destination!|" << endl;
 	cout << "|(Please note that this doesn't track your current location.)                    |" << endl;
-	cout << "|By: AntÃ³nio Melo & Jorge Vale & Telmo Barros                                    |" <<endl;
+	cout << "|By: António Melo & Jorge Vale & Telmo Barros                                    |" <<endl;
 	cout << "|________________________________________________________________________________|" << endl << endl;
 	cout << "First of all enter the map you want to load (list of maps):" << endl;
 
