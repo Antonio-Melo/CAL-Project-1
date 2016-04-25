@@ -219,10 +219,11 @@ void StreetMap::generateGraph() {
 
 	//Adding Vertexes
 	while(it != ite){
-		dist_graph.addVertex(it->first);
-		time_graph.addVertex(it->first);
-		dist_graph_no_tolls.addVertex(it->first);
-		time_graph_no_tolls.addVertex(it->first);
+		//dist_graph.addVertex(it->first);
+		//time_graph.addVertex(it->first);
+		//dist_graph_no_tolls.addVertex(it->first);
+		//time_graph_no_tolls.addVertex(it->first);
+		graph.addVertex(it->first);
 		it++;
 		//cout << "nodes" << endl;
 	}
@@ -237,24 +238,48 @@ void StreetMap::generateGraph() {
 			int id2 = itr->second.getNodesID()[i+1];
 			//distance calculation
 			double dist = nodeDistance(&(nodes.find(id1)->second), &(nodes.find(id2)->second));
-			double time = dist; //tem de ser adptado para cada estrada!!!!
+			double time;// = dist; //tem de ser adptado para cada estrada!!!!
+			bool toll = (itr->second.getType() == HIGHWAY);
 
-			dist_graph.addEdge(id1, id2, dist);
+			switch (itr->second.getType()){
+			case HIGHWAY:
+				time = 0.54545455 * dist;
+				//toll = true;
+				break;
+			case NATIONAL:
+				time = 0.75 * dist;
+				//toll = false;
+				break;
+			case ROUTE:
+				time = 1.5 * dist;
+				//toll = false;
+				break;
+			default:
+				time = 2 * dist;
+				//toll = false;
+				break;
+			}
+			graph.addEdge(id1, id2, dist, time, toll);
+			if (itr->second.isIsTwoWay()){
+				graph.addEdge(id2, id1, dist, time, toll);
+			}
+			/*dist_graph.addEdge(id1, id2, dist);
 			time_graph.addEdge(id1, id2, time);
 			if (itr->second.isIsTwoWay()){
 				dist_graph.addEdge(id2, id1, dist);
 				time_graph.addEdge(id2, id1, time);
-			}
+			}*/
 
 			//if it is highway it's not added to the no tolls graph
-			if (itr->second.getType() != HIGHWAY){
+			/*if (itr->second.getType() != HIGHWAY){
 				dist_graph_no_tolls.addEdge(id1, id2, dist);
 				time_graph_no_tolls.addEdge(id1, id2, time);
 				if (itr->second.isIsTwoWay()){
 					dist_graph_no_tolls.addEdge(id2, id1, dist);
 					time_graph_no_tolls.addEdge(id2, id1, time);
 				}
-			}
+			}*/
+
 		}
 		//cout << "roads" << endl;
 		itr++;
@@ -479,7 +504,7 @@ int StreetMap::getNodeID(const string road){
 				tmp.push_back(it->second.getNodesID()[i]);
 			}
 			//tmp.resize(it->second.getNodesID().size());
-				//tmp.insert(tmp.end(),it->second.getNodesID().begin(), it->second.getNodesID().end()); //not working because of memory issue
+			//tmp.insert(tmp.end(),it->second.getNodesID().begin(), it->second.getNodesID().end()); //not working because of memory issue
 		}
 		it++;
 	}
@@ -529,14 +554,14 @@ bool StreetMap::calculateItinerary(bool dist, bool tolls) {
 	Graph<int> *graph;
 	path.clear();
 
-	if (dist && tolls) graph = &dist_graph;
-	else if (!dist && tolls) graph = &time_graph;
-	else if (dist && !tolls) graph = &dist_graph_no_tolls;
-	else if (!dist && !tolls) graph = &time_graph_no_tolls;
+	//if (dist && tolls) graph = &dist_graph;
+	//else if (!dist && tolls) graph = &time_graph;
+	//else if (dist && !tolls) graph = &dist_graph_no_tolls;
+	//else if (!dist && !tolls) graph = &time_graph_no_tolls;
 
 
-	for(int i = 0; i < itinerary.size() - 1; i++){
-		if (!(calculateItineraryAux(itinerary[i].nodeID, itinerary[i+1].nodeID, graph))){
+	for(unsigned int i = 0; i < itinerary.size() - 1; i++){
+		if (!(calculateItineraryAux(itinerary[i].nodeID, itinerary[i+1].nodeID, dist, tolls))){
 			path.clear();
 			return false;
 		}
@@ -549,12 +574,12 @@ bool StreetMap::calculateItinerary(bool dist, bool tolls) {
 	return true;
 }
 
-bool StreetMap::calculateItineraryAux(int nodeID1, int nodeID2, Graph<int> *graph) {
+bool StreetMap::calculateItineraryAux(int nodeID1, int nodeID2, bool dist, bool tolls) {
 	vector<int> tmp;
 	//tmp = graph->getfloydWarshallPath(nodeID1, nodeID2);
 
-	graph->dijkstraShortestPath(nodeID1);
-	tmp = graph->getPath(nodeID1,nodeID2);
+	graph.dijkstraShortestPath(nodeID1, dist, tolls);
+	tmp = graph.getPath(nodeID1,nodeID2);
 	/*time_graph.dijkstraShortestPath();
 	dist_graph_no_tolls.dijkstraShortestPath();
 	time_graph_no_tolls.dijkstraShortestPath();*/
@@ -563,3 +588,30 @@ bool StreetMap::calculateItineraryAux(int nodeID1, int nodeID2, Graph<int> *grap
 
 	return (path.size() != 0);
 }
+
+void StreetMap::insertPOI(POI p, GraphViewer* gv){
+	pois.push_back(p);
+	gv->setVertexIcon(p.getNodeID(),"favourite.png");
+	gv->rearrange();
+}
+
+
+int StreetMap::closestPOIs(POIType type){
+
+	double distance = INT_INFINITY;
+	itineraryPoint iP;
+	int id;
+	iP = itinerary[itinerary.size()-1];
+
+	for(int i = 0; i < pois.size(); i++){
+		if(pois[i].getType() == type){
+		if(distance > nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second)){
+			distance = nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second);
+			 id = pois[i].getNodeID();
+			}
+		}
+	}
+	return id;
+}
+
+
