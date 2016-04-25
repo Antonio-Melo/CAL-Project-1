@@ -55,9 +55,9 @@ public:
 
 template <class T>
 struct vertex_greater_than {
-    bool operator()(Vertex<T> * a, Vertex<T> * b) const {
-        return a->getDist() > b->getDist();
-    }
+	bool operator()(Vertex<T> * a, Vertex<T> * b) const {
+		return a->getDist() > b->getDist();
+	}
 };
 
 
@@ -253,9 +253,9 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double d, double t, bool t
 	Vertex<T> *vS, *vD;
 	while (found!=2 && it!=ite ) {
 		if ( (*it)->info == sourc )
-			{ vS=*it; found++;}
+		{ vS=*it; found++;}
 		if ( (*it)->info == dest )
-			{ vD=*it; found++;}
+		{ vD=*it; found++;}
 		it ++;
 	}
 	if (found!=2) return false;
@@ -273,9 +273,9 @@ bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
 	Vertex<T> *vS, *vD;
 	while (found!=2 && it!=ite ) {
 		if ( (*it)->info == sourc )
-			{ vS=*it; found++;}
+		{ vS=*it; found++;}
 		if ( (*it)->info == dest )
-			{ vD=*it; found++;}
+		{ vD=*it; found++;}
 		it ++;
 	}
 	if (found!=2)
@@ -298,8 +298,8 @@ vector<T> Graph<T>::dfs() const {
 	vector<T> res;
 	it=vertexSet.begin();
 	for (; it !=ite; it++)
-	    if ( (*it)->visited==false )
-	    	dfs(*it,res);
+		if ( (*it)->visited==false )
+			dfs(*it,res);
 	return res;
 }
 
@@ -310,10 +310,10 @@ void Graph<T>::dfs(Vertex<T> *v,vector<T> &res) const {
 	typename vector<Edge<T> >::iterator it= (v->adj).begin();
 	typename vector<Edge<T> >::iterator ite= (v->adj).end();
 	for (; it !=ite; it++)
-	    if ( it->dest->visited == false ){
-	    	//cout << "ok ";
-	    	dfs(it->dest, res);
-	    }
+		if ( it->dest->visited == false ){
+			//cout << "ok ";
+			dfs(it->dest, res);
+		}
 }
 
 template <class T>
@@ -416,8 +416,8 @@ void Graph<T>::dfsVisit() {
 		(*it)->visited=false;
 	it=vertexSet.begin();
 	for (; it !=ite; it++)
-	    if ( (*it)->visited==false )
-	    	dfsVisit(*it);
+		if ( (*it)->visited==false )
+			dfsVisit(*it);
 }
 
 template <class T>
@@ -428,9 +428,9 @@ void Graph<T>::dfsVisit(Vertex<T> *v) {
 	typename vector<Edge<T> >::iterator ite= (v->adj).end();
 	for (; it !=ite; it++) {
 		if ( it->dest->processing == true) numCycles++;
-	    if ( it->dest->visited == false ){
-	    	dfsVisit(it->dest);
-	    }
+		if ( it->dest->visited == false ){
+			dfsVisit(it->dest);
+		}
 	}
 	v->processing = false;
 }
@@ -611,9 +611,9 @@ void Graph<T>::bellmanFordShortestPath(const T &s) {
 		for(unsigned int i = 0; i < v->adj.size(); i++) {
 			Vertex<T>* w = v->adj[i].dest;
 			//if(v->dist + v->adj[i].distance < w->dist) {
-				w->dist = v->dist + v->adj[i].distance;
-				w->path = v;
-				q.push(w);
+			w->dist = v->dist + v->adj[i].distance;
+			w->path = v;
+			q.push(w);
 			//}
 		}
 	}
@@ -656,20 +656,21 @@ void Graph<T>::dijkstraShortestPath(const T &s, bool byDist, bool withTolls) {
 			} else {
 				weight = v->adj[i].time;
 			}
+			if (withTolls || !v->adj[i].toll){
+				if((v->dist + weight) < w->dist) {
 
-			if((v->dist + weight) < w->dist && v->adj[i].toll) {
+					w->dist = v->dist + weight;
+					w->path = v;
 
-				w->dist = v->dist + weight;
-				w->path = v;
+					//se já estiver na lista, apenas a actualiza
+					if(!w->processing)
+					{
+						w->processing = true;
+						pq.push_back(w);
+					}
 
-				//se já estiver na lista, apenas a actualiza
-				if(!w->processing)
-				{
-					w->processing = true;
-					pq.push_back(w);
+					make_heap (pq.begin(),pq.end(),vertex_greater_than<T>());
 				}
-
-				make_heap (pq.begin(),pq.end(),vertex_greater_than<T>());
 			}
 		}
 	}

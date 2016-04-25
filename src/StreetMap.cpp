@@ -550,7 +550,7 @@ int StreetMap::getNodeID(const string road1, const string road2){
 }
 
 bool StreetMap::calculateItinerary(bool dist, bool tolls) {
-	Graph<int> *graph;
+	//Graph<int> *graph;
 	path.clear();
 
 	//if (dist && tolls) graph = &dist_graph;

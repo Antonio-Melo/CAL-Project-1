@@ -20,7 +20,7 @@ StreetMap *streetmap;
  */
 void seeItinerary() {
 	string option;
-	streetmap->calculateItinerary(true, false);
+	//streetmap->calculateItinerary(true, false);
 	bool dist,tolls;
 	cout << "Best way by time or distance?(T/D)";
 	cin >> option;
