@@ -207,7 +207,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 		//Hotels
 		n = rand() % nodes.size();
-		POI hotel = POI(n,POMPGAS);
+		POI hotel = POI(n,HOTEL);
 		pois.push_back(hotel);
 	}
 
@@ -304,7 +304,7 @@ GraphViewer* StreetMap::draw() {
 					gv->setVertexIcon(it->first,"dinner.png");
 					break;
 				case HOTEL:
-					gv->setVertexIcon(it->first,"hotel.jpg");
+					gv->setVertexIcon(it->first,"hotel.png");
 					break;
 				case FAVORITE:
 					gv->setVertexIcon(it->first,"favourite.png");
