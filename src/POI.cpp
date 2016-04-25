@@ -23,4 +23,3 @@ const int POI::getNodeID() const{
 const POIType POI::getType() const{
 		return type;
 }
-

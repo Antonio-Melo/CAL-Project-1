@@ -568,3 +568,18 @@ void StreetMap::insertPOI(POI p, GraphViewer* gv){
 	gv->setVertexIcon(p.getNodeID(),"favourite.png");
 	gv->rearrange();
 }
+
+vector<POI*> StreetMap::closestPOIs(POIType type){
+	double distance = INT_INFINITY;
+	itineraryPoint iP;
+	iP = itinerary[itinerary.size()-1];
+
+	for(int i = 0; i < pois.size(); i++){
+		if(pois[i].getType() == type){
+		if(distance > nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second))
+			distance = nodeDistance(&nodes.find(iP.nodeID)->second,&nodes.find(pois[i].getNodeID())->second);
+		}
+	}
+}
+
+
