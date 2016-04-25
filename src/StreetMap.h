@@ -171,7 +171,7 @@ public:
 	 * @param pois New vector to set
 	 */
 	void setPois(const vector<POI>& pois);
-	vector<POI*> closestPOIs(POIType type);
+	int closestPOIs(POIType type);
 };
 
 /**
