@@ -185,7 +185,6 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	//Choose random POI's
 	int numofpois=2;
-	int idPois =0;
 	int n;
 	srand (time(NULL));
 	if(nodes.size() > 100){
@@ -194,7 +193,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 	cout << "Loading Points of Interest..." <<endl;
 
-	for(unsigned int i = 0;i < numofpois;i++){
+	for(int i = 0;i < numofpois;i++){
 		//Restaurants
 		n = rand() % nodes.size();
 		POI rest = POI(n,RESTAURANT);
@@ -207,7 +206,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 
 		//Hotels
 		n = rand() % nodes.size();
-		POI hotel = POI(n,POMPGAS);
+		POI hotel = POI(n,HOTEL);
 		pois.push_back(hotel);
 	}
 
@@ -293,6 +292,29 @@ GraphViewer* StreetMap::draw() {
 		pixelX = ((it->second.getLongitudeDeg() - longMin)/ (longMax - longMin))*(DEFAULT_WIDTH);
 		gv->addNode(it->first,pixelX, pixelY);
 		gv->setVertexSize(it->first,1);
+		for(unsigned int i =0;i < pois.size();i++){
+			if(pois.at(i).getNodeID() == it->first){
+				gv->setVertexSize(it->first, 15);
+				switch(pois.at(i).getType()){
+				case POMPGAS:
+					gv->setVertexIcon(it->first,"gastation.png");
+					break;
+				case RESTAURANT:
+					gv->setVertexIcon(it->first,"dinner.png");
+					break;
+				case HOTEL:
+					gv->setVertexIcon(it->first,"hotel.png");
+					break;
+				case FAVORITE:
+					gv->setVertexIcon(it->first,"favourite.png");
+					break;
+				default:
+					break;
+				}
+				break;
+			}
+		}
+
 		it++;
 	}
 
@@ -355,15 +377,18 @@ void StreetMap::drawItinerary(){
 		gv->addEdge();
 		gv->setEdgeColor();
 	}*/
+
 	gv->defineVertexColor(YELLOW);
 	while(1){
-		for(int i = 0; i < path.size(); i++){
+		for(unsigned int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 15);
+			gv->setVertexIcon(path[i],"car.png");
 			gv->rearrange();
 			Sleep(1000);
 		}
-		for(int i = 0; i < path.size(); i++){
+		for(unsigned int i = 0; i < path.size(); i++){
 			gv->setVertexSize(path[i], 1);
+			gv->setVertexIcon(path[i],"background.jpg");
 		}
 		gv->rearrange();
 	}
@@ -509,7 +534,7 @@ bool StreetMap::calculateItinerary(bool dist, bool tolls) {
 	else if (!dist && !tolls) graph = &time_graph_no_tolls;
 
 
-	for(int i = 0; i < itinerary.size() - 1; i++){
+	for(unsigned int i = 0; i < itinerary.size() - 1; i++){
 		if (!(calculateItineraryAux(itinerary[i].nodeID, itinerary[i+1].nodeID, graph))){
 			path.clear();
 			return false;
@@ -537,7 +562,16 @@ bool StreetMap::calculateItineraryAux(int nodeID1, int nodeID2, Graph<int> *grap
 
 	return (path.size() != 0);
 }
+
+void StreetMap::insertPOI(POI p, GraphViewer* gv){
+	pois.push_back(p);
+	gv->setVertexIcon(p.getNodeID(),"favourite.png");
+	gv->rearrange();
+}
+
+
 int StreetMap::closestPOIs(POIType type){
+
 	double distance = INT_INFINITY;
 	itineraryPoint iP;
 	int id;
@@ -553,4 +587,5 @@ int StreetMap::closestPOIs(POIType type){
 	}
 	return id;
 }
+
 
