@@ -20,19 +20,20 @@ StreetMap *streetmap;
  */
 void seeItinerary() {
 	string option;
-	bool asd1,asd2;
+	streetmap->calculateItinerary(true, false);
+	bool dist,tolls;
 	cout << "Best way by time or distance?(T/D)";
 	cin >> option;
-	if(option == "T")
-		asd1 = true;
-	else asd1 = false;
-	cout << "Want to avoid tolls?";
+	if(option == "D")
+		dist = true;
+	else tolls = false;
+	cout << "Do you want to avoid tolls?(Y/N)";
 	cin >> option;
-	if(option == "Yes")
-		asd1 = false;
-	else asd1 = true;;
-	streetmap->calculateItinerary(asd1, asd2);
-	streetmap->drawItinerary();
+	if(option == "Y")
+		tolls = false;
+	else tolls = true;;
+	if(streetmap->calculateItinerary(dist, tolls))
+		streetmap->drawItinerary();
 	//streetmap->printItinerary();
 	//while(!cin.get());
 }
@@ -48,7 +49,7 @@ void addItineraryPoint() {
 		getline(cin, option);
 	}
 
-	int id;
+	int id = -1;
 	if (option == "1"){
 		cout << "Node ID:" << endl;
 		cin >> id;
@@ -92,13 +93,37 @@ void addItineraryPoint() {
 		string poi;
 		cout << "POI:" << endl;
 		for (int i = 0; i < streetmap->getPois().size(); i++){
-			cout << i << ": " << streetmap->getPois()[i].getNodeID() << "  " << streetmap->getPois()[i].toString();
+			cout << setw(3) << i << ": " << streetmap->getPois()[i].getNodeID() << "  " << streetmap->getPois()[i].toString() << endl;
 		}
-		cout << "Closest Hotel:" << streetmap->closestPOIs(HOTEL) << endl;
-		cout << "Closest Restaurant:" << streetmap->closestPOIs(RESTAURANT) << endl;
-		cout << "Closest Filling Station:" << streetmap->closestPOIs(POMPGAS)<< endl;
-
+		if (streetmap->getItinerary().size() >= 1){
+			cout << "  F: Closest Filling Station" << endl;
+			cout << "  H: Closest Hotel" << endl;
+			cout << "  R: Closest Restaurant" << endl;
+		}
 		getline(cin,poi);
+		if (streetmap->getItinerary().size() >= 1){
+			if (poi == "F"){
+				id = streetmap->closestPOIs(POMPGAS);
+			} else if (poi == "H"){
+				id = streetmap->closestPOIs(HOTEL);
+			} else if (poi == "R"){
+				id = streetmap->closestPOIs(RESTAURANT);
+			}
+		}
+
+		if (id == -1){
+			int index;
+			istringstream(poi) >> index;
+
+			if (index < 0 || index > streetmap->getPois().size() - 1){
+				cout << "Point was not added because POI inserted is out of range." << endl;
+				return;
+			}
+
+			id = streetmap->getPois()[index].getNodeID();
+			poi = streetmap->getPois()[index].toString();
+
+		}
 
 		streetmap->addItinerary(id, poi); //falta funcao get nodeID by POI name
 	}
@@ -114,6 +139,34 @@ void removeItineraryPoint() {
 	cin.ignore();
 	if(!(streetmap->removeItinerary(index)))
 		cout << "Point was not removed because index inserted is out of range." << endl;
+
+}
+
+/**
+ * Insert new POI into map
+ */
+void insertPoi(GraphViewer* gv){
+	int id;
+	bool found= false;
+
+	while (!found){
+		cout << "Node(id) of Point of Interest?"<< endl;
+		cin >> id;
+		cin.ignore();
+		if (id < streetmap->getNodes().size() && id >=0 ) {
+			stringstream tmp;
+			tmp << id;
+			streetmap->addItinerary(id, tmp.str());
+			found = true;
+		} else {
+			cout << "Point was not added because ID inserted is out of range."
+					<< endl;
+			return;
+		}
+	}
+	POI p = POI(id,FAVORITE);
+
+	streetmap->insertPOI(p,gv);
 
 }
 
@@ -136,7 +189,7 @@ int main(){
 	cout << "|Welcome!                                                                        |" << endl;
 	cout << "|This is a simple 'GPS' that allows you to find the best way to your destination!|" << endl;
 	cout << "|(Please note that this doesn't track your current location.)                    |" << endl;
-	cout << "|By: AntÃ³nio Melo & Jorge Vale & Telmo Barros                                    |" <<endl;
+	cout << "|By: António Melo & Jorge Vale & Telmo Barros                                    |" <<endl;
 	cout << "|________________________________________________________________________________|" << endl << endl;
 	cout << "First of all enter the map you want to load (list of maps):" << endl;
 
@@ -171,34 +224,35 @@ int main(){
 	streetmap = new StreetMap("maps/" + map_folder);
 
 	//streetmap->write();
-	streetmap->draw();
+	GraphViewer* gv =streetmap->draw();
 
 	string selected = "";
 
 	while (selected != "0"){
 
 		if (streetmap->getItinerary().size() != 0){
-			cout << "_______________________________________" << endl;
-			cout << "| #| Descriptor                  | Node|" << endl;
-			cout << "|________________________________|_____|" << endl;
+			cout << " _______________________________________" << endl;
+			cout << "| #| Descriptor                   | Node|" << endl;
+			cout << "|__|______________________________|_____|" << endl;
 			for(unsigned int i = 0; i < streetmap->getItinerary().size(); i++){
-				cout << "|" << setw(2) << i << "|" << setw(20) << streetmap->getItinerary()[i].name << "|" << setw(4) << streetmap->getItinerary()[i].nodeID << "|" << endl;
+				cout << "|" << setw(2) << i << "|" << setw(30) << streetmap->getItinerary()[i].name << "|" << setw(5) << streetmap->getItinerary()[i].nodeID << "|" << endl;
 			}
 		} else {
 			cout << "Itinerary is empty." << endl;
 		}
 
 		//Print menu
-		cout << "_______________________________________"  << endl;
-		cout << "|                                      |" << endl;
-		cout << "|              Easy Pilot              |" << endl;
-		cout << "|                                      |" << endl;
-		cout << "|   1. Calculate best way              |" << endl;
-		cout << "|   2. Add to Itinerary                |" << endl;
-		cout << "|   3. Remove from itinerary           |" << endl;
-		cout << "|   0. Exit                            |" << endl;
-		cout << "|                                      |" << endl;
-		cout << "|______________________________________|" << endl << endl;
+		cout << "|_______________________________________|"  << endl;
+		cout << "|                                       |" << endl;
+		cout << "|              Easy Pilot               |" << endl;
+		cout << "|                                       |" << endl;
+		cout << "|   1. Calculate best way               |" << endl;
+		cout << "|   2. Add to Itinerary                 |" << endl;
+		cout << "|   3. Remove from itinerary            |" << endl;
+		cout << "|   4. Insert Point of Interest         |" << endl;
+		cout << "|   0. Exit                             |" << endl;
+		cout << "|                                       |" << endl;
+		cout << "|_______________________________________|" << endl << endl;
 
 		getline(cin,selected);
 		if (selected == "1"){
@@ -211,6 +265,8 @@ int main(){
 			addItineraryPoint();
 		} else if (selected == "3"){
 			removeItineraryPoint();
+		} else if (selected == "4"){
+			insertPoi(gv);
 		} else if (selected != "0"){
 			cout << "Insert valid option!" << endl;
 		}

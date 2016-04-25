@@ -25,11 +25,13 @@ const POIType POI::getType() const{
 }
 const string POI::toString() const{
 	switch(type){
-	case 'POMPGAS':
-		return "POMPGAS";
-	case 'RESTAURANT':
-		return "RESTAURANT";
-	case 'HOTEL':
-		return "HOTEL";
+	case POMPGAS:
+		return "F";
+	case RESTAURANT:
+		return "R";
+	case HOTEL:
+		return "H";
+	default:
+		return "O";
 	}
 }

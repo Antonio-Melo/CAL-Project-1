@@ -16,7 +16,7 @@
 enum POIType{POMPGAS,RESTAURANT,HOTEL,FAVORITE};
 
 /**
- *
+ * Class that represents Point of Interest (Filling Station, Hotel, Restaurant and Favorite)
  */
 class POI {
 	int  nodeID;
@@ -42,7 +42,10 @@ public:
 	 * @return POIType with type of POI
 	 */
 	const POIType getType() const;
-
+	/**
+	 * Returns a string that identifies POI type
+	 * @return String F, H, R, O corresponding to the type of the POI
+	 */
 	const string toString() const;
 };
 
