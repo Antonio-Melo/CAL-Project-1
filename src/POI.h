@@ -42,6 +42,8 @@ public:
 	 * @return POIType with type of POI
 	 */
 	const POIType getType() const;
+
+	const string toString() const;
 };
 
 #endif /* SRC_POI_H_ */
