@@ -16,6 +16,7 @@ using namespace std;
  */
 class Node {
 	double latitude_deg, longitude_deg, latitude_rad, longitude_rad;
+	vector<int> RoadsID;
 public:
 	/**
 	 * Node constructor to generate nodes
@@ -65,6 +66,12 @@ public:
 	 * @param longitudeRad new longitude_rad to be added
 	 */
 	void setLongitudeRad(double longitudeRad);
+
+
+	vector<int> getRoadsID();
+
+	void addRoadsID(int id);
+
 };
 
 #endif

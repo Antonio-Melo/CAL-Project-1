@@ -182,6 +182,8 @@ public:
 	 */
 	int closestPOIs(POIType type);
 
+	vector<int> checkRoadsID();
+
 };
 
 /**

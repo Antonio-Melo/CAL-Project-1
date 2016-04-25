@@ -48,3 +48,10 @@ void Node::setLongitudeRad(double longitudeRad) {
 	longitude_rad = longitudeRad;
 }
 
+vector<int> Node::getRoadsID(){
+	return RoadsID;
+}
+
+void Node::addRoadsID(int id){
+	RoadsID.push_back(id);
+}

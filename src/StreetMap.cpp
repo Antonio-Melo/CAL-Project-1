@@ -614,4 +614,12 @@ int StreetMap::closestPOIs(POIType type){
 	return id;
 }
 
+vector<int> StreetMap::checkRoadsID(){
+	vector<int> temproadsid;
 
+	for(int i = 0; i < path.size(); i++){
+		for(int j = 0; j < (nodes.find(path[i])->second).getRoadsID().size(); j++){
+			temproadsid.push_back((nodes.find(path[i])->second).getRoadsID()[i]);
+		}
+	}
+}
