@@ -173,9 +173,12 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 		getline(linestream, data,';'); //read name of road and discard ;
 		linestream >> dNode;
 		//Add sub nodes to Road
-		if(roads.find(tempconvR.find(idRoad)->second)->second.getNodesID().size() == 0)
+		if(roads.find(tempconvR.find(idRoad)->second)->second.getNodesID().size() == 0){
 			roads.find(tempconvR.find(idRoad)->second)->second.addNodeID(tempconvN.find(oNode)->second);
+			nodes.find(tempconvN.find(oNode)->second)->second.addRoadsID(tempconvR.find(idRoad)->second);
+		}
 		roads.find(tempconvR.find(idRoad)->second)->second.addNodeID(tempconvN.find(dNode)->second);
+		nodes.find(tempconvN.find(dNode)->second)->second.addRoadsID(tempconvR.find(idRoad)->second);
 
 		//if (show_status) cout << count++ << endl;
 	}
