@@ -15,7 +15,7 @@
 using namespace std;
 
 StreetMap::StreetMap(string path) {
-	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str(), false);
+	loadFromTxt((path + "/nodes.txt").c_str(), (path + "/roads.txt").c_str(), (path + "/subroads.txt").c_str(), true);
 
 	generateGraph();
 	cout << "Graph generated !"<<endl;
@@ -53,7 +53,7 @@ void StreetMap::loadFromTxt(const char *nodes_path, const char *roads_path, cons
 	latMin = INT_INFINITY;
 	latMax = -INT_INFINITY;
 
-	cout << "Loading nodes..." << endl;
+	if (show_status) cout << "Loading nodes..." << endl;
 
 	while(getline(inFile, line))
 	{
@@ -373,6 +373,15 @@ void StreetMap::drawItinerary(){
 	gv = draw();
 
 	gv->defineVertexColor(YELLOW);
+	//print itinerary with other color
+	for(unsigned int i = 0; i < path.size() - 1; i++){
+					gv->addEdge(INT_INFINITY - i,path[i], path[i+1], EdgeType::DIRECTED);
+					gv->setEdgeColor(INT_INFINITY - i, MAGENTA);
+
+					gv->setEdgeThickness(INT_INFINITY - i,4);
+	}
+	gv->rearrange();
+
 	string option = "A";
 	while(option != "B"){
 		for(unsigned int i = 0; i < path.size(); i++){
