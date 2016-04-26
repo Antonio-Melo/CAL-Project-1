@@ -19,24 +19,30 @@ StreetMap *streetmap;
  * Shows itinerary graphically
  */
 void seeItinerary() {
-	string option;
-	//streetmap->calculateItinerary(true, false);
+	string option = "A";
 	bool dist,tolls;
-	cout << "Best way by time or distance?(T/D)";
-	cin >> option;
+	cout << "Best way by time or distance?(T/D)" << endl;
+	while (option != "D" && option != "T"){
+	getline(cin, option);
 	if(option == "D")
 		dist = true;
-	else tolls = false;
-	cout << "Do you want to avoid tolls?(Y/N)";
-	cin >> option;
+	else if(option == "T")
+		dist = false;
+	}
+	cout << "Do you want to avoid tolls?(Y/N)"<< endl;
+	while (option != "Y" && option != "N"){
+		getline(cin, option);
 	if(option == "Y")
 		tolls = false;
-	else tolls = true;;
-	if(streetmap->calculateItinerary(dist, tolls))
+	else if(option == "N")
+		tolls = true;
+	}
+	if(streetmap->calculateItinerary(dist, tolls)){
 		streetmap->printItinerary();
 		streetmap->drawItinerary();
-
-	//while(!cin.get());
+	} else {
+		cout << "There is no way to travel your itinerary..." << endl;
+	}
 }
 
 /**
@@ -271,19 +277,6 @@ int main(){
 		} else if (selected != "0"){
 			cout << "Insert valid option!" << endl;
 		}
-		//Generating Graph/ Writing & Drawing
-		//streetmap->write();
-		//streetmap->draw();
-		//string road1 = "y", road2 = "t";
-		//getline(cin,road1);
-		//getline(cin,road2);
-
-		//cout << streetmap->getItinerary()[0].nodeID << streetmap->getItinerary()[0].name;
-		//cout << streetmap->getItinerary()[1].nodeID << streetmap->getItinerary()[1].name;
-
-		//streetmap->calculateItinerary();
-
-		//cout << streetmap->getNodeID(road1);
 
 	}
 

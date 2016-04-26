@@ -42,17 +42,13 @@ typedef struct itineraryPoint{
 };
 
 /**
- * Class that stor all nodes, roads, POI's, graph with 'map and itinerary
+ * Class that stores all nodes, roads, POI's, graph with 'map' and itinerary
  */
 class StreetMap {
 	map<int,Node> nodes;
 	map<int,Road> roads;
 	vector<POI> pois;
 
-	//Graph<int> dist_graph;
-	//Graph<int> time_graph;
-	//Graph<int> dist_graph_no_tolls;
-	//Graph<int> time_graph_no_tolls;
 	Graph<int> graph;
 	vector<itineraryPoint> itinerary;
 	vector<int> path;

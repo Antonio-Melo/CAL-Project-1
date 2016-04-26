@@ -16,7 +16,7 @@
 enum POIType{POMPGAS,RESTAURANT,HOTEL,FAVORITE};
 
 /**
- * Class that represents Point of Interest (Filling Station, Hotel, Restaurant and Favorite)
+ * Class that represents Point of Interest (Filling Station, Hotel, Restaurant and Favorite), stores node where it locates and POI type
  */
 class POI {
 	int  nodeID;

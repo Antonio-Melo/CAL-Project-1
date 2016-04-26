@@ -1,8 +1,5 @@
 /*
  * Road.h
- *
- *  Created on: Apr 19, 2016
- *      Author: amelo
  */
 
 #ifndef SRC_ROAD_H_
@@ -17,6 +14,7 @@ using namespace std;
  */
 enum roadType{HIGHWAY,NATIONAL,ROUTE};
 /**
+ * Class that represents a road, stores its name, type if it is two way or only one, price (not used) and the group of nodes that compose the road
  *
  */
 class Road {

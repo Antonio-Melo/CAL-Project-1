@@ -12,7 +12,7 @@
 using namespace std;
 
 /**
- *
+ * Class that represents Node in a map, Points of a road or intersection between roads, stores latitude also roads ID that have it
  */
 class Node {
 	double latitude_deg, longitude_deg, latitude_rad, longitude_rad;
