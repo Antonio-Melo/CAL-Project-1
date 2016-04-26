@@ -33,8 +33,9 @@ void seeItinerary() {
 		tolls = false;
 	else tolls = true;;
 	if(streetmap->calculateItinerary(dist, tolls))
+		streetmap->printItinerary();
 		streetmap->drawItinerary();
-	//streetmap->printItinerary();
+
 	//while(!cin.get());
 }
 

@@ -182,7 +182,11 @@ public:
 	 */
 	int closestPOIs(POIType type);
 
-	vector<int> checkRoadsID();
+	int checkRoadsID(Node n1, Node n2);
+
+	string printItinerary();
+
+	string checkDirection(Node n1, Node n2, Node n3);
 
 };
 

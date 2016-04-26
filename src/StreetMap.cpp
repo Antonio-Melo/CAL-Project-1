@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <time.h>
+#include <math.h>
 
 using namespace std;
 
@@ -621,12 +622,53 @@ int StreetMap::closestPOIs(POIType type){
 	return id;
 }
 
-vector<int> StreetMap::checkRoadsID(){
-	vector<int> temproadsid;
-
-	for(int i = 0; i < path.size(); i++){
-		for(int j = 0; j < (nodes.find(path[i])->second).getRoadsID().size(); j++){
-			temproadsid.push_back((nodes.find(path[i])->second).getRoadsID()[i]);
+int StreetMap::checkRoadsID(Node n1, Node n2){
+	for(int i = 0; i < n1.getRoadsID().size(); i++){
+		for(int j = 0; j < n2.getRoadsID().size(); j++){
+		if(n1.getRoadsID()[i] == n2.getRoadsID()[j])
+			return n1.getRoadsID()[i];
 		}
 	}
+}
+
+string StreetMap::printItinerary(){
+	stringstream ss;
+	int tempID, lastID = -1;
+	string tempRoad, leftOrright;
+	tempID = checkRoadsID(nodes.find(path[0])->second, nodes.find(path[1])->second);
+	lastID = checkRoadsID(nodes.find(path[0])->second, nodes.find(path[1])->second);
+	ss << "Head to: " <<  roads.find(tempID)->second.getName() << endl;
+	for(int i = 1; i < path.size()-1;i++){
+		tempID = checkRoadsID(nodes.find(path[i])->second, nodes.find(path[i+1])->second);
+		if(tempID != lastID){
+			lastID = tempID;
+			leftOrright = checkDirection(nodes.find(path[i-1])->second, nodes.find(path[i])->second, nodes.find(path[i+1])->second);
+			tempRoad = roads.find(lastID)->second.getName();
+			ss << "Turn " << leftOrright << " at " << tempRoad << endl;
+		}
+	}
+	ss << "You arrived your destination!" << endl;
+	cout << ss.str();
+	return ss.str();
+}
+
+string StreetMap::checkDirection(Node n1, Node n2, Node n3){
+	double lat_1, lat_2, lat_3, long_1, long_2, long_3;
+
+	lat_1 = n1.getLatitudeDeg();
+	long_1 = n1.getLongitudeDeg();
+	lat_2 = n2.getLatitudeDeg();
+	long_2 = n2.getLongitudeDeg();
+	lat_3 = n3.getLatitudeDeg();
+	long_3 = n3.getLongitudeDeg();
+	double angle1 = atan2(lat_2 - lat_1,
+	                      long_2 -long_1);
+	double angle2 = atan2(lat_3 - lat_2,
+							long_3 - long_2);
+	double angle = angle2-angle1;
+
+	if(angle >= 0){
+		return "left";
+	}
+	else return "right";
 }
