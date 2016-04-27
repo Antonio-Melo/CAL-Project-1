@@ -375,10 +375,10 @@ void StreetMap::drawItinerary(){
 	gv->defineVertexColor(YELLOW);
 	//print itinerary with other color
 	for(unsigned int i = 0; i < path.size() - 1; i++){
-					gv->addEdge(INT_INFINITY - i,path[i], path[i+1], EdgeType::DIRECTED);
-					gv->setEdgeColor(INT_INFINITY - i, MAGENTA);
+		gv->addEdge(INT_INFINITY - i,path[i], path[i+1], EdgeType::DIRECTED);
+		gv->setEdgeColor(INT_INFINITY - i, MAGENTA);
 
-					gv->setEdgeThickness(INT_INFINITY - i,4);
+		gv->setEdgeThickness(INT_INFINITY - i,4);
 	}
 	gv->rearrange();
 
@@ -467,7 +467,7 @@ int StreetMap::getNodeID(const string road){
 			for (unsigned int i = 0; i < it->second.getNodesID().size(); i++){
 				tmp.push_back(it->second.getNodesID()[i]);
 			}
-			}
+		}
 		it++;
 	}
 
@@ -564,8 +564,8 @@ int StreetMap::closestPOIs(POIType type){
 int StreetMap::checkRoadsID(Node n1, Node n2){
 	for(int i = 0; i < n1.getRoadsID().size(); i++){
 		for(int j = 0; j < n2.getRoadsID().size(); j++){
-		if(n1.getRoadsID()[i] == n2.getRoadsID()[j])
-			return n1.getRoadsID()[i];
+			if(n1.getRoadsID()[i] == n2.getRoadsID()[j])
+				return n1.getRoadsID()[i];
 		}
 	}
 }
@@ -593,21 +593,39 @@ string StreetMap::printItinerary(){
 
 string StreetMap::checkDirection(Node n1, Node n2, Node n3){
 	double lat_1, lat_2, lat_3, long_1, long_2, long_3;
-
+	double angle;
 	lat_1 = n1.getLatitudeDeg();
 	long_1 = n1.getLongitudeDeg();
 	lat_2 = n2.getLatitudeDeg();
 	long_2 = n2.getLongitudeDeg();
 	lat_3 = n3.getLatitudeDeg();
 	long_3 = n3.getLongitudeDeg();
-	double angle1 = atan2(lat_2 - lat_1,
-	                      long_2 -long_1);
-	double angle2 = atan2(lat_3 - lat_2,
-							long_3 - long_2);
-	double angle = angle2-angle1;
 
-	if(angle >= 0){
-		return "left";
+	double vect1coordx = long_1 - long_2;
+	double vect1coordy = lat_1 -lat_2;
+	double vect2coordx = long_3 - long_2;
+	double vect2coordy = lat_3 -lat_2;
+	double total, sqrt1;
+
+	total = vect1coordx * vect2coordx + vect1coordy * vect2coordy;
+	sqrt1 = sqrt(pow(vect1coordx,2) + pow(vect1coordy,2)) * sqrt(pow(vect2coordx,2) + pow(vect2coordy,2));
+
+	angle = total/sqrt1;
+	angle = acos(angle);
+
+	double temp = vect2coordx*vect1coordy - vect2coordy*vect1coordx;
+
+	if(temp > 0){
+		if(angle < 180){
+			return "left";
+		}
+		else return "right";
 	}
-	else return "right";
+	else{
+		if(angle > 180){
+			return "left";
+		}
+		else return "right";
+
+	}
 }
