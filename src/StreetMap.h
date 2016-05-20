@@ -184,6 +184,11 @@ public:
 
 	string checkDirection(Node n1, Node n2, Node n3);
 
+
+	//Segunda parte do projeto
+	vector<string> exactStringSearch(string toSearch);
+	vector<string> aproximateStringSearch(string toSearch);
+
 };
 
 /**

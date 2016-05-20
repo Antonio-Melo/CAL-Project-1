@@ -23,19 +23,19 @@ void seeItinerary() {
 	bool dist,tolls;
 	cout << "Best way by time or distance?(T/D)" << endl;
 	while (option != "D" && option != "T"){
-	getline(cin, option);
-	if(option == "D")
-		dist = true;
-	else if(option == "T")
-		dist = false;
+		getline(cin, option);
+		if(option == "D")
+			dist = true;
+		else if(option == "T")
+			dist = false;
 	}
 	cout << "Do you want to avoid tolls?(Y/N)"<< endl;
 	while (option != "Y" && option != "N"){
 		getline(cin, option);
-	if(option == "Y")
-		tolls = false;
-	else if(option == "N")
-		tolls = true;
+		if(option == "Y")
+			tolls = false;
+		else if(option == "N")
+			tolls = true;
 	}
 	if(streetmap->calculateItinerary(dist, tolls)){
 		streetmap->printItinerary();
@@ -71,11 +71,32 @@ void addItineraryPoint() {
 		}
 	} else if (option == "2"){
 		string road1;
+		vector<string> results;
 		cout << "Road:" << endl;
 		getline(cin, road1);
-		id = streetmap->getNodeID(road1);
-		if (id != -1){
-			streetmap->addItinerary(id, road1);
+		//Segundo projeto
+		//results = streetmap->exactStringSearch(road1);
+		results = streetmap->aproximateStringSearch(road1);
+		if (results.size() > 0){
+			cout << "Search Results:" << endl;
+			for (unsigned int i = 0; i < results.size(); i++){
+				cout << setw(3) << i << ": " << results[i] << endl;
+			}
+			int index;
+			cin >> index;
+			cin.ignore();
+			if (index < results.size()){
+				id = streetmap->getNodeID(results[index]);
+				if (id != -1){
+					streetmap->addItinerary(id, results[index]);
+				} else {
+					cout << "Point was not added because road inserted was not found." << endl;
+					return;
+				}
+			} else {
+				cout << "Point was not added because index inserted is out of range." << endl;
+				return;
+			}
 		} else {
 			cout << "Point was not added because road inserted was not found." << endl;
 			return;
