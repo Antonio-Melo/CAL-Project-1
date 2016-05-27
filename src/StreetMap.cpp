@@ -473,11 +473,11 @@ int StreetMap::getNodeID(const string road){
 
 	cout << tmp.size();
 
-	/*if (tmp.size() != 0){
+	if (tmp.size() != 0){
 		cout << tmp.size();
 		int r = rand() % tmp.size();
 		return tmp[r];
-	}*/
+	}
 	return -1;
 }
 
@@ -628,110 +628,4 @@ string StreetMap::checkDirection(Node n1, Node n2, Node n3){
 		else return "right";
 
 	}
-}
-
-void pre_kmp(string pattern, vector<int> & prefix)
-{
-	int m=pattern.length();
-	prefix[0]=-1;
-	int k=-1;
-	for (int q=1; q<m; q++) {
-		while (k>-1 && pattern[k+1]!=pattern[q])
-			k = prefix[k];
-		if (pattern[k+1]==pattern[q]) k=k+1;
-		prefix[q]=k;
-	}
-}
-
-int kmp(string text, string pattern)
-{
-	int num=0;
-	int m=pattern.length();
-	vector<int> prefix(m);
-	pre_kmp(pattern, prefix);
-
-	int n=text.length();
-
-	int q=-1;
-	for (int i=0; i<n; i++) {
-		while (q>-1 && pattern[q+1]!=text[i])
-			q=prefix[q];
-		if (pattern[q+1]==text[i])
-			q++;
-		if (q==m-1) {
-			//cout <<"pattern occurs with shift" << i-m+1 << endl;
-			num++;
-			q=prefix[q];
-		}
-	}
-	return num;
-}
-
-
-vector<string> StreetMap::exactStringSearch(string toSearch)
-{
-	vector<string> tmp;
-	map<int, Road>::iterator it = roads.begin();
-	map<int, Road>::iterator ite = roads.end();
-
-	while(it != ite){
-		if (kmp(it->second.getName(),toSearch) > 0){
-				tmp.push_back(it->second.getName());
-		}
-		it++;
-	}
-
-	sort( tmp.begin(), tmp.end() );
-	tmp.erase( unique( tmp.begin(), tmp.end() ), tmp.end() );
-	return tmp;
-}
-
-
-int editDistance(string pattern, string text)
-{
-	int n=text.length();
-	vector<int> d(n+1);
-	int old,neww;
-	for (int j=0; j<=n; j++)
-		d[j]=j;
-	int m=pattern.length();
-	for (int i=1; i<=m; i++) {
-		old = d[0];
-		d[0]=i;
-		for (int j=1; j<=n; j++) {
-			if (pattern[i-1]==text[j-1]) neww = old;
-			else {
-				neww = min(old,d[j]);
-				neww = min(neww,d[j-1]);
-				neww = neww +1;
-			}
-			old = d[j];
-			d[j] = neww;
-		}
-	}
-	return d[n];
-}
-
-vector<string> StreetMap::aproximateStringSearch(string toSearch)
-{
-	multimap<int, string> tmp;
-		map<int, Road>::iterator it = roads.begin();
-		map<int, Road>::iterator ite = roads.end();
-
-		while(it != ite){
-					tmp.insert(pair<int,string>(editDistance(toSearch,it->second.getName()), it->second.getName()));
-			it++;
-		}
-
-	vector <string> results;
-
-	multimap<int, string>::iterator itr = tmp.begin();
-	multimap<int, string>::iterator itre = tmp.end();
-
-	for( itr; itr != itre; itr++) {
-	    	results.push_back( itr->second );
-	    	cout << itr->first << " - "<< itr->second << endl;
-	    }
-
-	return results;
 }

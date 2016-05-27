@@ -9,6 +9,7 @@
 #include <vector>
 #include <algorithm>
 #include "POI.h"
+#include "StringSearcher.h"
 
 using namespace std;
 
@@ -70,17 +71,24 @@ void addItineraryPoint() {
 			return;
 		}
 	} else if (option == "2"){
-		string road1;
+		string road1, searchType;
 		vector<string> results;
 		cout << "Road:" << endl;
 		getline(cin, road1);
 		//Segundo projeto
-		//results = streetmap->exactStringSearch(road1);
-		results = streetmap->aproximateStringSearch(road1);
+		cout << "E: Exact Search		A: Approximate Search" << endl;
+		getline(cin, searchType);
+		if (searchType == "E") {results = exactStringSearch(road1, streetmap->getRoads());}
+		else if (searchType == "A") {results = approximateStringSearch(road1, streetmap->getRoads());}
+		else{
+			cout << "Invalid type of search." << endl;
+			return;
+		}
 		if (results.size() > 0){
 			cout << "Search Results:" << endl;
 			for (unsigned int i = 0; i < results.size(); i++){
 				cout << setw(3) << i << ": " << results[i] << endl;
+				if (i == 10) break;
 			}
 			int index;
 			cin >> index;
@@ -211,6 +219,7 @@ int main(){
 	struct dirent *ent;
 	string map_folder;
 	vector<string> maps;
+	vector<string> searchResults;
 	cout << "_________________________________________________________________________________"  <<endl;
 	cout << "|                                                                                |"  <<endl;
 	cout << "|Easy Pilot CAL 2015/2016                                                        |" << endl;
@@ -219,7 +228,7 @@ int main(){
 	cout << "|(Please note that this doesn't track your current location.)                    |" << endl;
 	cout << "|By: António Melo & Jorge Vale & Telmo Barros                                    |" <<endl;
 	cout << "|________________________________________________________________________________|" << endl << endl;
-	cout << "First of all enter the map you want to load (list of maps):" << endl;
+	cout << "First of all enter the map you want to load:" << endl;
 
 	if ((dir = opendir ("maps")) != NULL) {
 		/* print all the files and directories within directory */
@@ -236,15 +245,39 @@ int main(){
 		return EXIT_FAILURE;
 	}
 
-	for (unsigned int i = 0; i < maps.size(); i++){
+	//Primeiro projeto
+	/*for (unsigned int i = 0; i < maps.size(); i++){
 		cout << i << ": " << maps[i] << endl;
-	}
+	}*/
 
-	while (find(maps.begin(), maps.end(), map_folder) == maps.end()){
+	/*while (find(maps.begin(), maps.end(), map_folder) == maps.end()){
 		getline(cin,map_folder);
-	}
+	}*/
 
-	//system("CLS");
+	getline(cin,map_folder);
+
+	searchResults = exactStringSearch(map_folder, maps);
+	if(searchResults.size() == 0){
+		searchResults = approximateStringSearch(map_folder, maps);
+	}
+	if(searchResults.size() == 1){
+		map_folder = searchResults[0];
+	} else {
+		for (unsigned int i = 0; i < searchResults.size(); i++){
+			cout << setw(3) << i << ": " << searchResults[i] << endl;
+			if (i == 10) break;
+		}
+		int index;
+		cin >> index;
+		cin.ignore();
+		if (index < searchResults.size()){
+			map_folder = searchResults[index];
+		} else {
+			cout << "Map was not loaded because index inserted is out of range." << endl;
+			return 1;
+		}
+
+	}
 
 	cout << "Loading Map" << endl << endl;
 
