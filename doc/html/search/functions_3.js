@@ -1,18 +1,13 @@
 var searchData=
 [
-  ['generategraph',['generateGraph',['../class_street_map.html#ac35930089b40d9941d047467c6a77a73',1,'StreetMap']]],
-  ['getitinerary',['getItinerary',['../class_street_map.html#adff936a929937d84c15b4e1c67a616fc',1,'StreetMap']]],
-  ['getlatitudedeg',['getLatitudeDeg',['../class_node.html#a04f868c78bb979a216cc4a2287ed84d0',1,'Node']]],
-  ['getlatituderad',['getLatitudeRad',['../class_node.html#a0ef0411959b64fdb83f47d09979a4366',1,'Node']]],
-  ['getlongitudedeg',['getLongitudeDeg',['../class_node.html#af729b9fb741e633070a1f1f3a994c8dc',1,'Node']]],
-  ['getlongituderad',['getLongitudeRad',['../class_node.html#a9212bd12cdb3fd24f7e58cb40f297ef5',1,'Node']]],
-  ['getname',['getName',['../class_road.html#a55877c477adb8c1985916da16830b70e',1,'Road']]],
-  ['getnodeid',['getNodeID',['../class_p_o_i.html#a5588a21d8684ba6a43c1cfa449c385e3',1,'POI::getNodeID()'],['../class_street_map.html#a9f4b850ce34e09dbe479ebefefc2bff6',1,'StreetMap::getNodeID(const string road)'],['../class_street_map.html#af92440f56a8c82c0646bc299a593ab1f',1,'StreetMap::getNodeID(const string road1, const string road2)']]],
-  ['getnodes',['getNodes',['../class_street_map.html#a31d1962b3e8b6c04a1c9da7072e52b72',1,'StreetMap']]],
-  ['getnodesid',['getNodesID',['../class_road.html#acc9ac2cbc4b4f4618ec5af7fe0cb032f',1,'Road']]],
-  ['getpois',['getPois',['../class_street_map.html#a99c44dc002dd5d49962795b9dceb60e3',1,'StreetMap']]],
-  ['getprice',['getPrice',['../class_road.html#add4deaf77d0451bdff6e4dc85adc6f36',1,'Road']]],
-  ['getroads',['getRoads',['../class_street_map.html#afbca0c17d0ae4074cd654757ee60544c',1,'StreetMap']]],
-  ['gettype',['getType',['../class_p_o_i.html#aeeefa4de58db6094e7f207acffc0341e',1,'POI::getType()'],['../class_road.html#aa306f56744c05883da31fc300abc054f',1,'Road::getType()']]],
-  ['graphviewer',['GraphViewer',['../class_graph_viewer.html#a8adc614f4fc290a3efcec7d7ceb1c58a',1,'GraphViewer::GraphViewer(int width, int height, bool dynamic)'],['../class_graph_viewer.html#ad9d7b1d8b4ba8ef18517eae0e68568a2',1,'GraphViewer::GraphViewer(int width, int height, bool dynamic, int port_n)']]]
+  ['defineedgecolor',['defineEdgeColor',['../class_graph_viewer.html#a4102580b69826ba83251ef7bb262f8be',1,'GraphViewer']]],
+  ['defineedgecurved',['defineEdgeCurved',['../class_graph_viewer.html#a08f362be0e682d91e7506dca8caae1b8',1,'GraphViewer']]],
+  ['defineedgedashed',['defineEdgeDashed',['../class_graph_viewer.html#af785279b5c204df0e274b20c36276fc3',1,'GraphViewer']]],
+  ['definevertexcolor',['defineVertexColor',['../class_graph_viewer.html#a76de8676b7a93d72af514b84cdaa4d21',1,'GraphViewer']]],
+  ['definevertexicon',['defineVertexIcon',['../class_graph_viewer.html#af1adb6a361457187a820e01dcf0a34b7',1,'GraphViewer']]],
+  ['definevertexsize',['defineVertexSize',['../class_graph_viewer.html#ac4b2a9fec74d38e64088aa79ca4b7d9b',1,'GraphViewer']]],
+  ['dfs',['dfs',['../class_graph.html#a3f62ba0e37c5c011299c93d60e3a8be3',1,'Graph']]],
+  ['dijkstrashortestpath',['dijkstraShortestPath',['../class_graph.html#a5f93226450643b5bb5e4fe461866085d',1,'Graph']]],
+  ['draw',['draw',['../class_street_map.html#a4df2b9f052caf9a2d76f0dfcecd87ea4',1,'StreetMap']]],
+  ['drawitinerary',['drawItinerary',['../class_street_map.html#ad1282a7c040f3afb058c06f82645735b',1,'StreetMap']]]
 ];

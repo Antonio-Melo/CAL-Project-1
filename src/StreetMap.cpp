@@ -1,10 +1,3 @@
-/*
- * StreetMap.cpp
- *
- *  Created on: 19/04/2016
- *      Author: Telmo
- */
-
 #include "StreetMap.h"
 #include <cmath>
 #include <stdlib.h>

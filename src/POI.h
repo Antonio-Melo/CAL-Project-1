@@ -1,10 +1,3 @@
-/*
- * Poi.h
- *
- *  Created on: Apr 21, 2016
- *      Author: Antonio
- */
-
 #ifndef SRC_POI_H_
 #define SRC_POI_H_
 

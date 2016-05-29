@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loadfromtxt',['loadFromTxt',['../class_street_map.html#a740ba1419feabfbd04cb583d2e52aa3e',1,'StreetMap']]]
+  ['floydwarshallshortestpath',['floydWarshallShortestPath',['../class_graph.html#ae5161f4408bf1ead2b29d19d67fb04ee',1,'Graph']]]
 ];

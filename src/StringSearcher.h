@@ -1,3 +1,7 @@
+/**
+ * File containing all functions related to string matching algorithms and auxiliary functions
+ */
+
 #ifndef STRINGSEARCHER_H_
 #define STRINGSEARCHER_H_
 
@@ -8,6 +12,11 @@
 #include <sstream>
 using namespace std;
 
+/**
+ * Prefix function
+ * @param pattern Pattern to process
+ * @param prefix Vector to fill with the length of the longest prefix in all indexes of the pattern
+ */
 void pre_kmp(string pattern, vector<int> & prefix){
 	int m=pattern.length();
 	prefix[0]=-1;
@@ -20,6 +29,12 @@ void pre_kmp(string pattern, vector<int> & prefix){
 	}
 }
 
+/**
+ * Knuth-Morris-Pratt implementation to find how many times a pattern occurs in a text
+ * @param text Text to find pattern in
+ * @param pattern Pattern to search in text
+ * @return Number of times pattern appeared in text
+ */
 int kmp(string text, string pattern){
 	int num=0;
 	int m=pattern.length();
@@ -43,6 +58,12 @@ int kmp(string text, string pattern){
 	return num;
 }
 
+/**
+ * Exact string search in a vector of strings
+ * @param toSearch String to be searched
+ * @param text Vector of strings to find toSearch pattern
+ * @return Vector sorted by number of times toSearch appeared
+ */
 vector<string> exactStringSearch(string toSearch, vector<string> text){
 	vector<string> tmp;
 
@@ -57,6 +78,12 @@ vector<string> exactStringSearch(string toSearch, vector<string> text){
 	return tmp;
 }
 
+/**
+ * Exact string search in a vector of strings
+ * @param toSearch String to be searched
+ * @param roads Map of roads to be used by streetmap raw
+ * @return Vector sorted by number of times toSearch appeared
+ */
 vector<string> exactStringSearch(string toSearch, map<int,Road> roads){
 	vector<string> tmp;
 		map<int, Road>::iterator it = roads.begin();
@@ -69,6 +96,12 @@ vector<string> exactStringSearch(string toSearch, map<int,Road> roads){
 		return exactStringSearch(toSearch,tmp);
 }
 
+/**
+ * EditDistance implementation to find minimum edit distance
+ * @param pattern Pattern to search in text
+ * @param text Text to find pattern in
+ * @return Number of edit operations to transform pattern into text
+ */
 int editDistance(string pattern, string text){
 	int n=text.length();
 	vector<int> d(n+1);
@@ -93,6 +126,12 @@ int editDistance(string pattern, string text){
 	return d[n];
 }
 
+/**
+ * Approximate string search in a vector of strings
+ * @param toSearch String to be searched
+ * @param text Vector of strings to find toSearch pattern
+ * @return Vector sorted by number of times toSearch appeared
+ */
 vector<string> approximateStringSearch(string toSearch, vector<string> text){
 	multimap<float, string> tmp;
 
@@ -120,6 +159,12 @@ vector<string> approximateStringSearch(string toSearch, vector<string> text){
 	return results;
 }
 
+/**
+ * Approximate string search in a vector of strings
+ * @param toSearch String to be searched
+ * @param roads Map of roads to be used by streetmap raw
+ * @return Vector sorted by number of times toSearch appeared
+ */
 vector<string> approximateStringSearch(string toSearch, map<int,Road> roads){
 	vector<string> tmp;
 	map<int, Road>::iterator it = roads.begin();

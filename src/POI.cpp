@@ -1,10 +1,3 @@
-/*
- * Poi.cpp
- *
- *  Created on: Apr 21, 2016
- *      Author: Antonio
- */
-
 #include "POI.h"
 
 POI::POI(int id, POIType type) {

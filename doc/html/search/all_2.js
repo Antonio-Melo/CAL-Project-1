@@ -1,11 +1,14 @@
 var searchData=
 [
-  ['defineedgecolor',['defineEdgeColor',['../class_graph_viewer.html#a4102580b69826ba83251ef7bb262f8be',1,'GraphViewer']]],
-  ['defineedgecurved',['defineEdgeCurved',['../class_graph_viewer.html#a08f362be0e682d91e7506dca8caae1b8',1,'GraphViewer']]],
-  ['defineedgedashed',['defineEdgeDashed',['../class_graph_viewer.html#af785279b5c204df0e274b20c36276fc3',1,'GraphViewer']]],
-  ['definevertexcolor',['defineVertexColor',['../class_graph_viewer.html#a76de8676b7a93d72af514b84cdaa4d21',1,'GraphViewer']]],
-  ['definevertexicon',['defineVertexIcon',['../class_graph_viewer.html#af1adb6a361457187a820e01dcf0a34b7',1,'GraphViewer']]],
-  ['definevertexsize',['defineVertexSize',['../class_graph_viewer.html#ac4b2a9fec74d38e64088aa79ca4b7d9b',1,'GraphViewer']]],
-  ['draw',['draw',['../class_street_map.html#a4df2b9f052caf9a2d76f0dfcecd87ea4',1,'StreetMap']]],
-  ['drawitinerary',['drawItinerary',['../class_street_map.html#ad1282a7c040f3afb058c06f82645735b',1,'StreetMap']]]
+  ['calculateitinerary',['calculateItinerary',['../class_street_map.html#a4a2612cd8b5530b8c65b8a77796ee02e',1,'StreetMap']]],
+  ['calculateitineraryaux',['calculateItineraryAux',['../class_street_map.html#a4652ecf4512a0f3c9cf750d7e10bf6cb',1,'StreetMap']]],
+  ['checkdirection',['checkDirection',['../class_street_map.html#a41a88cb63233e9e1945401915a4b4bc7',1,'StreetMap']]],
+  ['checkroadsid',['checkRoadsID',['../class_street_map.html#a4d0b093027238e8ed0303b44c5b7e272',1,'StreetMap']]],
+  ['closestpois',['closestPOIs',['../class_street_map.html#a5203b965558f39ea92123c4960bb0627',1,'StreetMap']]],
+  ['closewindow',['closeWindow',['../class_graph_viewer.html#a85990c1eaac7feed3950960d4bd2fd4c',1,'GraphViewer']]],
+  ['connection',['Connection',['../class_connection.html',1,'Connection'],['../class_connection.html#a8089476d48ba545f44e691cd4bd0278d',1,'Connection::Connection()']]],
+  ['connection_2ecpp',['connection.cpp',['../connection_8cpp.html',1,'']]],
+  ['connection_2eh',['connection.h',['../connection_8h.html',1,'']]],
+  ['createwindow',['createWindow',['../class_graph_viewer.html#ae5247dc66449dcd21fc5d531bbbaddfa',1,'GraphViewer']]],
+  ['cyan',['CYAN',['../graphviewer_8h.html#ad243f93c16bc4c1d3e0a13b84421d760',1,'graphviewer.h']]]
 ];

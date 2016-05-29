@@ -1,10 +1,3 @@
-/*
- * StreetMap.h
- *
- *  Created on: 19/04/2016
- *      Author: Telmo
- */
-
 #ifndef SRC_STREETMAP_H_
 #define SRC_STREETMAP_H_
 

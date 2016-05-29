@@ -1,7 +1,3 @@
-/*
- * Road.h
- */
-
 #ifndef SRC_ROAD_H_
 #define SRC_ROAD_H_
 

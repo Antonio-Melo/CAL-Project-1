@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['insertpoi',['insertPOI',['../class_street_map.html#a20e2be2d9777d25eb69820fb641f5d56',1,'StreetMap']]],
-  ['isistwoway',['isIsTwoWay',['../class_road.html#ad0619067d24849f4676a0bc7f359aa60',1,'Road']]],
-  ['itinerarypoint',['itineraryPoint',['../structitinerary_point.html',1,'']]]
+  ['favorite',['FAVORITE',['../_p_o_i_8h.html#a25e80434e5e009656a1c54d229fec056afd3a8854adbf848c406058efeac956c9',1,'POI.h']]],
+  ['floydwarshallshortestpath',['floydWarshallShortestPath',['../class_graph.html#ae5161f4408bf1ead2b29d19d67fb04ee',1,'Graph']]]
 ];
